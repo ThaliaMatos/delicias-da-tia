@@ -1,4 +1,3 @@
-// src/controllers/produtoController.ts
 import { Request, Response } from 'express';
 
 // Simulação de produtos (seria no banco de dados no futuro)
@@ -9,6 +8,7 @@ let produtos = [
 // Função para listar produtos
 export const listarProdutos = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json(produtos);
+    return
 };
 
 // Função para criar produto
@@ -18,6 +18,7 @@ export const criarProduto = async (req: Request, res: Response): Promise<void> =
   // Verificação de campos obrigatórios
   if (!nome || !descricao || !preco || !imagem_url) {
     res.status(400).json({ mensagem: 'Todos os campos são obrigatórios!' });
+    return
   }
 
   // Simulando a criação do produto (adicionando à lista)
