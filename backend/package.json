@@ -1,0 +1,33 @@
+{
+  "name": "delicias-da-tia",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido em TypeScript para o projeto final do curso técnico. O sistema permite que a administradora (tia) cadastre produtos com foto e descrição, visualize pedidos e gerencie o catálogo de uma confeitaria artesanal. Utiliza Prisma com PostgreSQL, autenticação JWT e upload de imagens com Multer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "confeitaria",
+    "backend",
+    "typescript",
+    "projeto-final",
+    "autenticação",
+    "jwt",
+    "prisma",
+    "postgresql",
+    "multer",
+    "upload-de-imagens",
+    "api-rest",
+    "gerenciamento-de-produtos",
+    "delícias-da-tia",
+    "nodejs"
+  ],
+  "author": "Thalia Matos",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "sucrase": "^3.35.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
