@@ -1,0 +1,10 @@
+body {
+  background: linear-gradient(123deg,#fff,#ffc1ff, #ffc1e3, #ffc1e3, #ffc1ff, #fff);
+  display: block !important;
+}
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+

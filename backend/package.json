@@ -4,7 +4,7 @@
   "description": "Projeto desenvolvido em TypeScript para o projeto final do curso técnico. O sistema permite que a administradora (tia) cadastre produtos com foto e descrição, visualize pedidos e gerencie o catálogo de uma confeitaria artesanal. Utiliza Prisma com PostgreSQL, autenticação JWT e upload de imagens com Multer.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "keywords": [
     "confeitaria",
@@ -25,9 +25,16 @@
   "author": "Thalia Matos",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.15.18",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.21",
     "sucrase": "^3.35.0",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }

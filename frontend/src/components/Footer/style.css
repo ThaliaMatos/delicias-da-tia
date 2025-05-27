@@ -1,0 +1,12 @@
+h5 {
+    color: rgb(187, 9, 187);
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(187, 9, 187);
+    text-shadow: 0 2px 2px white;
+}
