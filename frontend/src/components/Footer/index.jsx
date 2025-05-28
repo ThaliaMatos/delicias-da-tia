@@ -2,7 +2,7 @@ import './style.css';
 
 export default function Footer() {
     return (
-      <footer className="bg-pink text-white pt-4 pb-2">
+      <footer className="bg-pink  text-white pt-4 pb-2">
         <div className="container text-center text-md-start">
           <div className="row">
             {/* Sobre a loja */}

@@ -1,5 +1,5 @@
 h5 {
-    color: rgb(187, 9, 187);
+    color: #a20566;
 }
 
 a {
@@ -7,6 +7,6 @@ a {
 }
 
 a:hover {
-    color: rgb(187, 9, 187);
+    color: #a20566;
     text-shadow: 0 2px 2px white;
 }

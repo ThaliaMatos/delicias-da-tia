@@ -1,16 +1,31 @@
-import Header from "./components/Header/index";
-import './App.css'
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Cardapio from './pages/Cardapio';
+import Sobre from './pages/Sobre';
+import Contato from './pages/Contato';
+
+import Categoria from './pages/Categoria';
 
 function App() {
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <>
+    <div className="app-container">
       <Header />
-      <main className="flex-grow-1">
-        <h1>Seja bem vindo ao nosso site</h1>
+      <main className='main-content'>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cardapio" element={<Cardapio />} />
+        <Route path="/cardapio/:categoria" element={<Categoria />} />
+        <Route path="/sobre" element={<Sobre />} />
+        <Route path="/contato" element={<Contato />} />
+        {/* outras rotas */}
+      </Routes>
       </main>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }
 

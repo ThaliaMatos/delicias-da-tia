@@ -1,0 +1,5 @@
+.carousel-wrapper {
+    width: 100vw;/* Largura total da janela */
+    margin-left: calc(-50vw + 50%); /* Remove os limites de container */
+  }
+  

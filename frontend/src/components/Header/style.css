@@ -5,4 +5,29 @@ header {
     right: 0px;
 }
 
+/* etilo dos ícones de redes sociais */
+.social-icons {
+    position: fixed; /* Fixa os ícones na tela */
+    top: 30%; /* Centraliza verticalmente */
+    right: 10px; /* Distância da borda esquerda */
+    transform: translateY(-50%); /* Ajusta o alinhamento */
+    z-index: 1000; /* Mantém os ícones sobre o conteúdo */
+}
+
+.social-icons i {
+    display: block; /* Mantém os ícones empilhados */
+    text-align: center; /* Centraliza o conteúdo do link */
+    width: 40px; /* Tamanho do botão */
+    height: 40px; /* Tamanho do botão */
+    line-height: 40px; /* Alinha o ícone no centro */
+    background-color: #f8f9fa; /* Cor de fundo dos ícones */
+    color: #6c757d; /* Cor do ícone */
+    border-radius: 50%; /* Torna os ícones redondos */
+    color: #a20566;
+}
+
+.social-icons i:hover {
+    background-color: #a20566; /* Cor ao passar o mouse */
+    color: #fff; /* Cor do ícone ao passar o mouse */
+}
 

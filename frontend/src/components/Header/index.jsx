@@ -1,40 +1,54 @@
 import './style.css';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     return (
         <header className="navbar navbar-expand-lg navbar-light bg-pink">
             <div className="container">
-                <a className="navbar-brand logo" href="index.html"><img src="./public/img/logo.png" alt="logo" className='logo img-fluid' /></a>
+                <Link className="navbar-brand logo" to="/">
+                    <img src="/img/logo.png" alt="logo" className="logo img-fluid" />
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item"><a className="nav-link" href="index.html">Início</a></li>
+                        <li className="nav-item"><Link className="nav-link" to="/">Início</Link></li>
 
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="cardapio.html" data-bs-toggle="dropdown">Cardápio</a>
+                            <Link className="nav-link dropdown-toggle" to="/cardapio" data-bs-toggle="dropdown">Cardápio</Link>
                             <div className="dropdown-menu bg-pink">
-                                <a className="dropdown-item" href="amanteigados.html">Amanteigados</a>
-                                <a className="dropdown-item" href="bolos.html">Bolos</a>
-                                <a className="dropdown-item" href="boloslowcarb.html">Bolos Low Carb</a>
-                                <a className="dropdown-item" href="docesespecias.html">Doces Especiais</a>
-                                <a className="dropdown-item" href="salgados.html">Salgados</a>
+                                <Link className="dropdown-item" to="/cardapio/amanteigados">Amanteigados</Link>
+                                <Link className="dropdown-item" to="/cardapio/bolos">Bolos</Link>
+                                <Link className="dropdown-item" to="/cardapio/boloslowcarb">Bolos Low Carb</Link>
+                                <Link className="dropdown-item" to="/cardapio/docesespeciais">Doces Especiais</Link>
+                                <Link className="dropdown-item" to="/cardapio/salgados">Salgados</Link>
                             </div>
                         </li>
 
-                        <li className="nav-item"><a className="nav-link" href="sobre.html">Sobre Nós</a></li>
-                        <li className="nav-item"><a className="nav-link" href="contato.html">Contato</a></li>
+                        <li className="nav-item"><Link className="nav-link" to="/sobre">Sobre Nós</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/contato">Contato</Link></li>
 
                         <li className="nav-item">
-                            <a className="nav-link position-relative" href="#" id="ver-carrinho">
+                            <Link className="nav-link position-relative" to="/carrinho">
                                 <i className="bi bi-cart3"></i>
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contador-carrinho" style={{ display: 'none' }}>0</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
+
+                {/* Ícones de navegação */}
+                <div className="social-icons">
+                    <a href="https://wa.me/qr/ISUKN7JK7E23N1" target="_blank" className="text-decoration-none me-3">
+                        <i className="bi bi-whatsapp"></i>
+                    </a>
+                    {/* <a href="https://www.instagram.com/deliciasdatia25?igsh=MXVjMmVlNDczMWFoaQ==" target="_blank" className="text-decoration-none">
+                        <i className="bi bi-instagram"></i>
+                    </a> */}
+                </div>
+
             </div>
         </header>
     );

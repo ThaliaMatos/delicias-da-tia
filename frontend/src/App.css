@@ -1,10 +1,23 @@
-body {
-  background: linear-gradient(123deg,#fff,#ffc1ff, #ffc1e3, #ffc1e3, #ffc1ff, #fff);
-  display: block !important;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(123deg,#fff,#ffc1ff,black,#ffc1e3,#ffc1e3,#ffc1ff,#fff);
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
 #root {
-  margin: 0 auto;
-  text-align: center;
+  height: 100%;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}

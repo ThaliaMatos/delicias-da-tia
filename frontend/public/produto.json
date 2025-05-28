@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "nome": "Bolo de Cenoura",
+      "descricao": "Com cobertura de chocolate",
+      "preco": 25,
+      "imagem": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 2,
+      "nome": "Brigadeiro",
+      "descricao": "Pacote com 10 unidades",
+      "preco": 10,
+      "imagem": "https://via.placeholder.com/150"
+    }
+  ]
+  
