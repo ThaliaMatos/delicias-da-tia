@@ -1,15 +1,6 @@
 export default function Sobre() {
     return (
         <div className="bg-gradient-body">
-            {/* Ícones de navegação */}
-            <div className="social-icons">
-                <a href="https://wa.me/qr/ISUKN7JK7E23N1" target="_blank" className="text-decoration-none">
-                    <i className="bi bi-whatsapp"></i>
-                </a>
-                <a href="https://www.instagram.com/deliciasdatia25?igsh=MXVjMmVlNDczMWFoaQ==" target="_blank" className="text-decoration-none">
-                    <i className="bi bi-instagram"></i>
-                </a>
-            </div>
 
             {/* Conteúdo Sobre Nós */}
             <section className="container my-5">

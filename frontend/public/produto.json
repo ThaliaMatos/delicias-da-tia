@@ -1,17 +1,206 @@
 [
-    {
-      "id": 1,
-      "nome": "Bolo de Cenoura",
-      "descricao": "Com cobertura de chocolate",
-      "preco": 25,
-      "imagem": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 2,
-      "nome": "Brigadeiro",
-      "descricao": "Pacote com 10 unidades",
-      "preco": 10,
-      "imagem": "https://via.placeholder.com/150"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "nome": "Bolo de Cenoura",
+    "descricao": "Com cobertura de chocolate",
+    "preco": 25,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "bolos"
+  },
+  {
+    "id": 2,
+    "nome": "Bolo de Chocolate",
+    "descricao": "Recheado com brigadeiro",
+    "preco": 30,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "bolos"
+  },
+  {
+    "id": 3,
+    "nome": "Bolo de Fubá",
+    "descricao": "Tradicional com erva-doce",
+    "preco": 20,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "bolos"
+  },
+  {
+    "id": 4,
+    "nome": "Bolo de Laranja",
+    "descricao": "Fofinho com sabor natural",
+    "preco": 22,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "bolos"
+  },
+  {
+    "id": 5,
+    "nome": "Bolo Mesclado",
+    "descricao": "Baunilha com chocolate",
+    "preco": 24,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "bolos"
+  },
+
+  {
+    "id": 6,
+    "nome": "Brigadeiro Gourmet",
+    "descricao": "Pacote com 10 unidades",
+    "preco": 12,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "docesespeciais"
+  },
+  {
+    "id": 7,
+    "nome": "Beijinho",
+    "descricao": "Coco fresco e leite condensado",
+    "preco": 12,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "docesespeciais"
+  },
+  {
+    "id": 8,
+    "nome": "Camafeu de Nozes",
+    "descricao": "Doce refinado de nozes",
+    "preco": 18,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "docesespeciais"
+  },
+  {
+    "id": 9,
+    "nome": "Trufa de Maracujá",
+    "descricao": "Recheio cítrico e cobertura de chocolate",
+    "preco": 15,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "docesespeciais"
+  },
+  {
+    "id": 10,
+    "nome": "Doce de Leite Caseiro",
+    "descricao": "Feito no tacho com leite fresco",
+    "preco": 10,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "docesespeciais"
+  },
+
+  {
+    "id": 11,
+    "nome": "Cookies Amanteigados",
+    "descricao": "Sabor baunilha com gotas de chocolate",
+    "preco": 8,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "amanteigados"
+  },
+  {
+    "id": 12,
+    "nome": "Biscoito de Polvilho",
+    "descricao": "Crocante e leve",
+    "preco": 6,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "amanteigados"
+  },
+  {
+    "id": 13,
+    "nome": "Biscoito de Maizena",
+    "descricao": "Clássico e derrete na boca",
+    "preco": 7,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "amanteigados"
+  },
+  {
+    "id": 14,
+    "nome": "Biscoito Amanteigado com Goiabada",
+    "descricao": "Sabor caseiro irresistível",
+    "preco": 9,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "amanteigados"
+  },
+  {
+    "id": 15,
+    "nome": "Cookie Integral",
+    "descricao": "Feito com aveia e mel",
+    "preco": 10,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "amanteigados"
+  },
+
+  {
+    "id": 16,
+    "nome": "Bolo de Amêndoas",
+    "descricao": "Zero açúcar e sem glúten",
+    "preco": 30,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "boloslowcarb"
+  },
+  {
+    "id": 17,
+    "nome": "Bolo de Coco Low Carb",
+    "descricao": "Com farinha de amêndoas",
+    "preco": 32,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "boloslowcarb"
+  },
+  {
+    "id": 18,
+    "nome": "Brownie Low Carb",
+    "descricao": "Feito com cacau puro",
+    "preco": 28,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "boloslowcarb"
+  },
+  {
+    "id": 19,
+    "nome": "Bolo de Limão Low Carb",
+    "descricao": "Sabor leve e cítrico",
+    "preco": 30,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "boloslowcarb"
+  },
+  {
+    "id": 20,
+    "nome": "Mini Muffin Low Carb",
+    "descricao": "Pacote com 4 unidades",
+    "preco": 26,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "boloslowcarb"
+  },
+
+  {
+    "id": 21,
+    "nome": "Coxinha de Frango",
+    "descricao": "Com massa de batata cremosa",
+    "preco": 6,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "salgados"
+  },
+  {
+    "id": 22,
+    "nome": "Empadinha",
+    "descricao": "Sabor frango com catupiry",
+    "preco": 7,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "salgados"
+  },
+  {
+    "id": 23,
+    "nome": "Esfiha de Carne",
+    "descricao": "Massa leve e recheio suculento",
+    "preco": 6,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "salgados"
+  },
+  {
+    "id": 24,
+    "nome": "Quibe Assado",
+    "descricao": "Com recheio de requeijão",
+    "preco": 8,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "salgados"
+  },
+  {
+    "id": 25,
+    "nome": "Mini Pão de Queijo",
+    "descricao": "Pacote com 10 unidades",
+    "preco": 10,
+    "imagem": "https://via.placeholder.com/150",
+    "categoria": "salgados"
+  }
+]

@@ -1,5 +1,33 @@
+h5 {
+    color: white;
+}
+
 .carousel-wrapper {
     width: 100vw;/* Largura total da janela */
     margin-left: calc(-50vw + 50%); /* Remove os limites de container */
+  }
+  
+  .carousel-img {
+    width: 100%; /* Garantir que as imagens ocupem toda a largura do card */
+    height: 500px; /* Definir a altura fixa */
+    object-fit: cover; /* Garantir que a imagem não distorça e preencha o espaço */
+}
+
+  @media (max-width: 992px) {
+    .carousel-img {
+      height: 400px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-img {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .carousel-img {
+      height: 200px;
+    }
   }
   

@@ -9,8 +9,9 @@ export default function Login() {
   function handleLogin(e) {
     e.preventDefault();
 
-    if (email === 'thalia.matos3197@gmail.com' && senha === '123456') {
+    if (email === 'ddt@gmail.com' && senha === '123456') {
       localStorage.setItem('logada', 'true');
+      window.dispatchEvent(new Event('storageChanged')); // avisar o Footer
       navigate('/admin');
     } else {
       alert('E-mail ou senha inválidos');

@@ -1,10 +1,24 @@
 html, body {
-  margin: 0;
-  padding: 0;
   height: 100%;
-  background: linear-gradient(123deg,#fff,#ffc1ff,black,#ffc1e3,#ffc1e3,#ffc1ff,#fff);
+  margin: 0;
+}
+
+body {
   min-height: 100vh;
-  font-family: sans-serif;
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    #fff5f9 15%,
+    #ffebf4 30%,
+    #ffd9ec 45%,
+    #ffc1e3 60%,
+    #ffb7db 75%,
+    #ffade0 90%,
+    #ffa3db 100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin: 0;
 }
 
 #root {

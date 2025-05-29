@@ -34,7 +34,7 @@ export default function Carousel() {
           <div className="carousel-item active">
             <img
               src="/img/bolonopoteDestaque1.jpg"
-              className="d-block w-100"
+              className="d-block w-100 carousel-img"
               alt="Bolo de pote"
             />
             <div className="carousel-caption d-none d-md-block">
@@ -46,7 +46,7 @@ export default function Carousel() {
           <div className="carousel-item">
             <img
               src="/img/docedeleiteDestaque2.jpg"
-              className="d-block w-100"
+              className="d-block w-100 carousel-img"
               alt="Doces de leite"
             />
             <div className="carousel-caption d-none d-md-block">
@@ -58,7 +58,7 @@ export default function Carousel() {
           <div className="carousel-item">
             <img
               src="/img/tortasalgadaDestaque3.jpg"
-              className="d-block w-100"
+              className="d-block w-100 carousel-img"
               alt="Tortas salgadas"
             />
             <div className="carousel-caption d-none d-md-block">

@@ -1,6 +1,33 @@
 import './style.css';
+import { Link, useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+
 
 export default function Footer() {
+
+  const [logada, setLogada] = useState(false);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    function handleStorageChange() {
+      setLogada(localStorage.getItem('logada') === 'true');
+    }
+
+    window.addEventListener('storageChanged', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storageChanged', handleStorageChange);
+    };
+  }, []);
+
+  
+  function handleLogout() {
+    localStorage.removeItem('logada');
+    setLogada(false);
+    navigate('/');
+  }
+
     return (
       <footer className="bg-pink  text-white pt-4 pb-2">
         <div className="container text-center text-md-start">
@@ -24,14 +51,35 @@ export default function Footer() {
               <a href="https://www.instagram.com/deliciasdatia25/" className="me-3" target="_blank">
                 <i className="bi bi-instagram"></i> Instagram
               </a><br />
-              <a href="https://wa.me/5579991175958?text=Olá!!!" className="me-3" target="_blank">
+              <a href="https://wa.me/5579998821048?text=Olá!!!" className="me-3" target="_blank">
                 <i className="bi bi-whatsapp "></i> WhatsApp
               </a>
             </div>
           </div>
         </div>
+
         <hr className="my-3" />
-        <p className="text-center mb-0">&copy; 2025 Delícias da Tia. Todos os direitos reservados.</p>
+        
+        <div className="container d-flex flex-column align-items-center">
+  <p className="text-center mb-1">&copy; 2025 Delícias da Tia. Todos os direitos reservados.</p>
+
+  {logada ? (
+    <>
+      <p className="small mb-1">Olá, Tia!</p>
+      <button onClick={handleLogout} className="btn btn-outline-light btn-sm">
+        Logout
+      </button>
+    </>
+  ) : (
+    <Link
+      to="/login"
+      className="small text-white text-decoration-underline"
+      style={{ fontWeight: 'bold' }}
+    >
+      Área Administrativa
+    </Link>
+  )}
+</div>
       </footer>
     );
   }
