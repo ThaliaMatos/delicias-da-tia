@@ -33,3 +33,68 @@ body {
   flex: 1;
   padding: 20px;
 }
+
+.btn-enviar{
+  background-color: #a20566;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-enviar:hover {
+  background-color: #870356;
+}
+
+.btn-tia {
+  background-color: #a20566 !important;
+  color: white !important;
+  border: none;
+}
+
+.btn-tia:hover {
+  background-color: #870356 !important;
+}
+
+.card-opcao:hover {
+  background-color: #fce4ec;
+  border: 2px solid #a20566;
+  transition: 0.3s;
+}
+
+.controle-quantidade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.controle-quantidade button {
+  background-color: #a20566;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.controle-quantidade span {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 12px;
+  min-width: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.botao-carrinho {
+  background-color: #a20566;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+}
+

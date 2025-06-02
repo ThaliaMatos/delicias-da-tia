@@ -7,6 +7,7 @@ import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Carrinho from './pages/Carrinho';
 
 import Categoria from './pages/Categoria';
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cardapio/:categoria" element={<Categoria />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/contato" element={<Contato />} />
+        <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
         {/* outras rotas */}
