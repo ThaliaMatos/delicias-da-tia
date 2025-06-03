@@ -18,9 +18,10 @@ export default function Admin() {
   const [categoriaFiltro, setCategoriaFiltro] = useState('todas');
 
   // Estados do formulário
-  const [idEditar, setIdEditar] = useState(null); // novo: id do produto que está editando
+  const [idEditar, setIdEditar] = useState(null);
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [preco, setPreco] = useState('');
   const [imagemBase64, setImagemBase64] = useState('');
   const [categoria, setCategoria] = useState('');
 
@@ -53,6 +54,7 @@ export default function Admin() {
     setDescricao('');
     setImagemBase64('');
     setCategoria('');
+    setPreco('');
   }
 
   function handleSalvarProduto(e) {
@@ -72,6 +74,7 @@ export default function Admin() {
                 ...p,
                 nome,
                 descricao,
+                preco,
                 imagem: imagemBase64 || p.imagem,
                 categoria,
               }
@@ -82,9 +85,10 @@ export default function Admin() {
     } else {
       // Cadastrar novo produto
       const novoProduto = {
-        id: produtos.length > 0 ? Math.max(...produtos.map(p => p.id)) + 1 : 1,
+        id: produtos.length > 0 ? Math.max(...produtos.map((p) => p.id)) + 1 : 1,
         nome,
         descricao,
+        preco: parseFloat(preco).toFixed(2),
         imagem: imagemBase64 || 'https://via.placeholder.com/300x200',
         categoria,
       };
@@ -103,6 +107,7 @@ export default function Admin() {
     setDescricao(produto.descricao);
     setImagemBase64(produto.imagem);
     setCategoria(produto.categoria);
+    setPreco(produto.preco);
   }
 
   function handleExcluirProduto(id) {
@@ -157,6 +162,18 @@ export default function Admin() {
               </select>
             </div>
             <div className="mb-3">
+              <label className="form-label">Preço (R$)</label>
+              <input
+                type="number"
+                className="form-control"
+                value={preco}
+                onChange={(e) => setPreco(e.target.value)}
+                required
+                min="0"
+                step="0.01"
+              />
+            </div>
+            <div className="mb-3">
               <label className="form-label">Imagem do Produto</label>
               <input
                 type="file"
@@ -201,7 +218,6 @@ export default function Admin() {
       return (
         <div className="mt-4">
           <h4>Produtos Cadastrados</h4>
-
           <div className="mb-3">
             <label className="form-label">Filtrar por categoria:</label>
             <select
@@ -231,6 +247,7 @@ export default function Admin() {
                     <h5 className="card-title">{produto.nome}</h5>
                     <p className="card-text">{produto.descricao}</p>
                     <span className="badge bg-secondary">{produto.categoria}</span>
+                    <p className="mt-2 fw-bold">R$ {parseFloat(produto.preco).toFixed(2)}</p>
                     <div className="mt-3 d-flex justify-content-between">
                       <button
                         className="btn btn-sm btn-primary"

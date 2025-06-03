@@ -4,15 +4,15 @@
     "nome": "Bolo de Cenoura",
     "descricao": "Com cobertura de chocolate",
     "preco": 25,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6pd_g70-pQZvk3Qn2orq_r1Ed1PGRlgFs3YKVUxIkyKY6XB8yaL5ELvn4p3-ELv_9bGk&usqp=CAU",
     "categoria": "bolos"
   },
   {
     "id": 2,
     "nome": "Bolo de Chocolate",
     "descricao": "Recheado com brigadeiro",
-    "preco": 30,
-    "imagem": "https://via.placeholder.com/150",
+    "preco": 30,   
+ "imagem":"https://bakeandcakegourmet.com.br/uploads/site/receitas/bolo-de-chocolate-facil-e-barato-rspxk8nc.jpg",
     "categoria": "bolos"
   },
   {
@@ -20,7 +20,7 @@
     "nome": "Bolo de Fubá",
     "descricao": "Tradicional com erva-doce",
     "preco": 20,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://cozinhaglobo.com.br/wp-content/uploads/2020/11/14-bolo-fuba.jpg",
     "categoria": "bolos"
   },
   {
@@ -28,7 +28,8 @@
     "nome": "Bolo de Laranja",
     "descricao": "Fofinho com sabor natural",
     "preco": 22,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://s2-receitas.glbimg.com/F9dgqtXN9uu_YJvp8uV48PEnhBU=/0x0:1280x800/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2021/N/d/zEcoFRSqGbrt3F6uWpBQ/bolo-de-laranja-com-calda.jpg"
+,
     "categoria": "bolos"
   },
   {
@@ -36,7 +37,7 @@
     "nome": "Bolo Mesclado",
     "descricao": "Baunilha com chocolate",
     "preco": 24,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQj6oWnp31JsMRiCRl9hEtpZ5nFx2VPok8qg&s",
     "categoria": "bolos"
   },
 
@@ -45,7 +46,8 @@
     "nome": "Brigadeiro Gourmet",
     "descricao": "Pacote com 10 unidades",
     "preco": 12,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem":     
+"https://harald.com.br/wp-content/uploads/2020/04/briadeirogormet-melken-700x520-1.jpg",
     "categoria": "docesespeciais"
   },
   {
@@ -53,7 +55,7 @@
     "nome": "Beijinho",
     "descricao": "Coco fresco e leite condensado",
     "preco": 12,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://i.panelinha.com.br/i1/bk-5745-beijinhoreceita.webp",
     "categoria": "docesespeciais"
   },
   {
@@ -61,7 +63,7 @@
     "nome": "Camafeu de Nozes",
     "descricao": "Doce refinado de nozes",
     "preco": 18,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://www.receitasnestle.com.br/sites/default/files/srh_recipes/6e49506b711ee76f63254bd458fdb885.jpg",
     "categoria": "docesespeciais"
   },
   {
@@ -69,7 +71,7 @@
     "nome": "Trufa de Maracujá",
     "descricao": "Recheio cítrico e cobertura de chocolate",
     "preco": 15,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://shopsupermercadobrazil.com/cdn/shop/files/12b4bb40-ac8d-4e8d-b375-8e7f4b6551c0.jpg?v=1725492866",
     "categoria": "docesespeciais"
   },
   {
@@ -77,7 +79,7 @@
     "nome": "Doce de Leite Caseiro",
     "descricao": "Feito no tacho com leite fresco",
     "preco": 10,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://receitadaboa.com.br/wp-content/uploads/2024/11/doce-de-leite.jpg",
     "categoria": "docesespeciais"
   },
 
@@ -86,7 +88,7 @@
     "nome": "Cookies Amanteigados",
     "descricao": "Sabor baunilha com gotas de chocolate",
     "preco": 8,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://admin.docepedia.com/site/uploads/2021/07/cookies-d-768x768-1.jpg",
     "categoria": "amanteigados"
   },
   {
@@ -94,7 +96,7 @@
     "nome": "Biscoito de Polvilho",
     "descricao": "Crocante e leve",
     "preco": 6,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://receitas.wap.ind.br/wp-content/uploads/2025/01/biscoito-de-polvilho-1080x640.jpg",
     "categoria": "amanteigados"
   },
   {
@@ -102,7 +104,7 @@
     "nome": "Biscoito de Maizena",
     "descricao": "Clássico e derrete na boca",
     "preco": 7,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://s2-receitas.glbimg.com/tk8kR7MtA4VWobkGWQS7ReB30Qo=/0x0:1280x800/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2022/3/U/ZoZzXJSESJh5aIvcHBQg/biscoito-de-maisena-receita.jpg",
     "categoria": "amanteigados"
   },
   {
@@ -110,7 +112,7 @@
     "nome": "Biscoito Amanteigado com Goiabada",
     "descricao": "Sabor caseiro irresistível",
     "preco": 9,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://i.ytimg.com/vi/pmkiqpwD9aU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCq49Y9uFbRRWkGNO0wP2u8qbrkyg",
     "categoria": "amanteigados"
   },
   {
@@ -118,7 +120,7 @@
     "nome": "Cookie Integral",
     "descricao": "Feito com aveia e mel",
     "preco": 10,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://receitadaboa.com.br/wp-content/uploads/2024/08/Imagem-ilustrativa-de-biscoito-de-aveia.webp",
     "categoria": "amanteigados"
   },
 
@@ -127,7 +129,7 @@
     "nome": "Bolo de Amêndoas",
     "descricao": "Zero açúcar e sem glúten",
     "preco": 30,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://guiadacozinha.com.br/wp-content/uploads/2019/10/bolo-de-amendoas-52805.jpg",
     "categoria": "boloslowcarb"
   },
   {
@@ -135,7 +137,7 @@
     "nome": "Bolo de Coco Low Carb",
     "descricao": "Com farinha de amêndoas",
     "preco": 32,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://bolosparavender.com/wp-content/uploads/2021/09/Como-fazer-bolo-low-carb-com-farinha-de-amendoa.jpg",
     "categoria": "boloslowcarb"
   },
   {
@@ -143,7 +145,7 @@
     "nome": "Brownie Low Carb",
     "descricao": "Feito com cacau puro",
     "preco": 28,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVhnKLx8Ze0x5rcdQf7FqKJ5Yj6GtY1dW5WA&s",
     "categoria": "boloslowcarb"
   },
   {
@@ -151,7 +153,7 @@
     "nome": "Bolo de Limão Low Carb",
     "descricao": "Sabor leve e cítrico",
     "preco": 30,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://static.wixstatic.com/media/8024f8_5830338d245845f2bee90dd2a646461f~mv2.png/v1/fill/w_568,h_368,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8024f8_5830338d245845f2bee90dd2a646461f~mv2.png",
     "categoria": "boloslowcarb"
   },
   {
@@ -159,7 +161,7 @@
     "nome": "Mini Muffin Low Carb",
     "descricao": "Pacote com 4 unidades",
     "preco": 26,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://www.mundoboaforma.com.br/wp-content/uploads/2021/06/Cupcake-low-carb.jpg",
     "categoria": "boloslowcarb"
   },
 
@@ -168,7 +170,7 @@
     "nome": "Coxinha de Frango",
     "descricao": "Com massa de batata cremosa",
     "preco": 6,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://i.ytimg.com/vi/ZiI1HK6zOkk/maxresdefault.jpg",
     "categoria": "salgados"
   },
   {
@@ -176,7 +178,7 @@
     "nome": "Empadinha",
     "descricao": "Sabor frango com catupiry",
     "preco": 7,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem":     "https://minhasreceitinhas.com.br/wp-content/uploads/2022/08/maxresdefault-50.jpg",
     "categoria": "salgados"
   },
   {
@@ -184,7 +186,7 @@
     "nome": "Esfiha de Carne",
     "descricao": "Massa leve e recheio suculento",
     "preco": 6,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://s2-receitas.glbimg.com/LkFUI5GpQ-VNswgmn9-pPSm-Cjo=/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2025/6/i/z2mrzpRXSuGOzSUMEjyg/esfiha-de-carne-moida-receita.jpg",
     "categoria": "salgados"
   },
   {
@@ -192,7 +194,7 @@
     "nome": "Quibe Assado",
     "descricao": "Com recheio de requeijão",
     "preco": 8,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkIzamKYCKSf5F45YHkbCDyw7izEfx_KL2A&s",
     "categoria": "salgados"
   },
   {
@@ -200,7 +202,8 @@
     "nome": "Mini Pão de Queijo",
     "descricao": "Pacote com 10 unidades",
     "preco": 10,
-    "imagem": "https://via.placeholder.com/150",
+    "imagem": "https://static.itdg.com.br/images/640-440/ee186c287ebf4016dc98f28f151f301c/pao-de-queijo-mineiro.jpg",
     "categoria": "salgados"
   }
 ]
+ 

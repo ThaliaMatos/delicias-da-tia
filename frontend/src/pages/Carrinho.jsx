@@ -43,7 +43,7 @@ export default function Carrinho() {
 
     const total = calcularTotal();
     const textoFinal = `${mensagem}\n\nTotal: R$ ${total}`;
-    const link = `https://wa.me/5599999999999?text=${encodeURIComponent(textoFinal)}`; // troque pelo seu número
+    const link = `https://wa.me/5579998821048?text=${encodeURIComponent(textoFinal)}`; // troque pelo seu número
     window.open(link, '_blank');
   };
 
