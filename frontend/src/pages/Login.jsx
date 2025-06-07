@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -7,20 +8,34 @@ export default function Login() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const navigate = useNavigate();
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
-    if (email === 'ddt@gmail.com' && senha === '123456') {
-      localStorage.setItem('logada', 'true');
-      window.dispatchEvent(new Event('storageChanged'));
-      navigate('/admin');
-    } else {
+    try {
+      const resposta = await axios.post('http://localhost:3000/api/login', {
+        email,
+        senha,
+      });
+
+      const token = resposta.data.token;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('logada', 'true');
+
+        window.dispatchEvent(new Event('storageChanged'));
+        navigate('/admin');
+      } else {
+        alert('Login sem token. Verifique o backend.');
+      }
+    } catch (erro) {
+      console.error('Erro ao fazer login:', erro);
       alert('E-mail ou senha inválidos');
     }
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 ">
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
         <h3 className="text-center mb-4">Login da Tia</h3>
         <form onSubmit={handleLogin}>
@@ -51,14 +66,14 @@ export default function Login() {
                 type="checkbox"
                 id="mostrarSenha"
                 checked={mostrarSenha}
-                onChange={(e) => setMostrarSenha(e.target.checked)}
+                onChange={() => setMostrarSenha(!mostrarSenha)}
               />
               <label className="form-check-label" htmlFor="mostrarSenha">
                 Mostrar senha
               </label>
             </div>
           </div>
-          <button type="submit" className="btn-enviar w-100 py-2 rounded ">
+          <button type="submit" className="btn-enviar w-100 py-2 rounded">
             Entrar
           </button>
         </form>
