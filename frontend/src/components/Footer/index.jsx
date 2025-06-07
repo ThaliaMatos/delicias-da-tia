@@ -1,35 +1,18 @@
 import './style.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-
-
-export default function Footer() {
-
-  const [logada, setLogada] = useState(false);
+export default function Footer({ logada, setLogada }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    function handleStorageChange() {
-      setLogada(localStorage.getItem('logada') === 'true');
-    }
-
-    window.addEventListener('storageChanged', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storageChanged', handleStorageChange);
-    };
-  }, []);
-
 
   function handleLogout() {
     localStorage.removeItem('logada');
+    localStorage.removeItem('token');
     setLogada(false);
     navigate('/');
   }
 
   return (
-    <footer className="bg-pink  text-white pt-4 pb-2">
+    <footer className="bg-pink text-white pt-4 pb-2">
       <div className="container text-center text-md-start">
         <div className="row">
           {/* Sobre a loja */}
@@ -53,9 +36,7 @@ export default function Footer() {
               >
                 FAQ
               </Link>
-
             </div>
-
           </div>
 
           {/* Horário */}
@@ -68,11 +49,22 @@ export default function Footer() {
           {/* Redes sociais */}
           <div className="col-md-4 mb-3">
             <h5>Redes Sociais</h5>
-            <a href="https://www.instagram.com/deliciasdatia25/" className="me-3" target="_blank">
+            <a
+              href="https://www.instagram.com/deliciasdatia25/"
+              className="me-3"
+              target="_blank"
+              rel="noreferrer"
+            >
               <i className="bi bi-instagram"></i> Instagram
-            </a><br />
-            <a href="https://wa.me/5579998821048?text=Olá!!!" className="me-3" target="_blank">
-              <i className="bi bi-whatsapp "></i> WhatsApp
+            </a>
+            <br />
+            <a
+              href="https://wa.me/5579998821048?text=Olá!!!"
+              className="me-3"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i className="bi bi-whatsapp"></i> WhatsApp
             </a>
           </div>
         </div>

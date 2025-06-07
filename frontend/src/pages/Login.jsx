@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Login() {
+export default function Login({ setLogada }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -22,8 +22,7 @@ export default function Login() {
       if (token) {
         localStorage.setItem('token', token);
         localStorage.setItem('logada', 'true');
-
-        window.dispatchEvent(new Event('storageChanged'));
+        setLogada(true); // atualiza o estado no App.jsx
         navigate('/admin');
       } else {
         alert('Login sem token. Verifique o backend.');
