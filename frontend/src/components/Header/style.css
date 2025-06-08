@@ -15,6 +15,57 @@ body {
   padding-bottom: 0;
 }
 
+/* Personaliza os 3 tracinhos */
+.navbar-toggler {
+    border: none; /* Remove a borda padrão */
+    outline: none;
+  }
+  
+ .navbar-toggler {
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: none;
+  width: 30px;
+  height: 22px;
+  position: relative;
+  display: inline-block;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon div {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #a20566; 
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Linha do meio */
+.navbar-toggler-icon div {
+  top: 9px;
+}
+
+/* Linha de cima */
+.navbar-toggler-icon::before {
+  top: 0;
+}
+
+/* Linha de baixo */
+.navbar-toggler-icon::after {
+  bottom: 0;
+}
+
+
 
 /* etilo dos ícones de redes sociais */
 .social-icons {

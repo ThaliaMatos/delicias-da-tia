@@ -1,24 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useCarrinho } from '../context/CarrinhoContext';
 
 export default function Carrinho() {
-  const [carrinho, setCarrinho] = useState([]);
+  const { carrinho, atualizarCarrinho } = useCarrinho();
 
-  useEffect(() => {
-    const itensSalvos = JSON.parse(localStorage.getItem('carrinho')) || [];
-    setCarrinho(itensSalvos);
-  }, []);
-
+  //salvar o carrinho
   const salvarCarrinho = (novoCarrinho) => {
-    setCarrinho(novoCarrinho);
+    atualizarCarrinho(novoCarrinho);
     localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
   };
 
+  // Aumenta a quantidade 
   const aumentarQuantidade = (index) => {
     const novoCarrinho = [...carrinho];
     novoCarrinho[index].quantidade += 1;
     salvarCarrinho(novoCarrinho);
   };
 
+  // Diminui a quantidade 
   const diminuirQuantidade = (index) => {
     const novoCarrinho = [...carrinho];
     if (novoCarrinho[index].quantidade > 1) {
@@ -27,21 +25,25 @@ export default function Carrinho() {
     }
   };
 
+  // Remove o item
   const removerItem = (index) => {
     const novoCarrinho = carrinho.filter((_, i) => i !== index);
     salvarCarrinho(novoCarrinho);
   };
 
+  // Calcula o total do carrinho 
   const calcularTotal = () => {
     return carrinho.reduce((total, item) => total + item.preco * item.quantidade, 0).toFixed(2);
   };
 
+  //mensagem que será enviada pelo WhatsApp
   const gerarMensagemWhatsApp = () => {
     return carrinho.map(item =>
       `🍰 ${item.nome} (x${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}`
     ).join('\n');
   };
 
+  // Envia o pedido pelo WhatsApp e limpa o carrinho
   const enviarPedido = () => {
     if (carrinho.length === 0) {
       alert('O carrinho está vazio.');
@@ -56,8 +58,7 @@ export default function Carrinho() {
     window.open(link, '_blank');
 
     // Limpa o carrinho após envio
-    setCarrinho([]);
-    localStorage.removeItem('carrinho');
+    salvarCarrinho([]);
   };
 
   return (
@@ -73,13 +74,17 @@ export default function Carrinho() {
               <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                   <strong>{item.nome}</strong> <br />
-                  <span className="text-muted">R$ {item.preco.toFixed(2)} x {item.quantidade} = <strong>R$ {(item.preco * item.quantidade).toFixed(2)}</strong></span>
+                  <span className="text-muted">
+                    R$ {item.preco.toFixed(2)} x {item.quantidade} = <strong>R$ {(item.preco * item.quantidade).toFixed(2)}</strong>
+                  </span>
                 </div>
 
+                <div className="d-flex align-items gap-2">
                 <div className="controle-quantidade">
                   <button className="botao-quantidade" onClick={() => diminuirQuantidade(index)}>-</button>
                   <span>{item.quantidade}</span>
                   <button className="botao-quantidade" onClick={() => aumentarQuantidade(index)}>+</button>
+                </div>
                   <button className="botao-remover" onClick={() => removerItem(index)}>🗑️</button>
                 </div>
 

@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useCarrinho } from '../../context/CarrinhoContext';
 import './style.css';
 
 export default function Destaques() {
   const [produtos, setProdutos] = useState([]);
   const [quantidades, setQuantidades] = useState({});
+  const [mensagem, setMensagem] = useState('');
+  const { adicionarProduto } = useCarrinho();
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/produto.json')
       .then((res) => {
-        const destaques = res.data.slice(0, 3); // pega apenas 3 produtos
+        const destaques = res.data.slice(0, 3);
         setProdutos(destaques);
 
         const quantidadesIniciais = {};
@@ -28,20 +31,20 @@ export default function Destaques() {
 
   const adicionarAoCarrinho = (produto) => {
     const qtd = quantidades[produto.id] || 1;
-    console.log(`Produto adicionado ao carrinho: ${produto.nome} x${qtd}`);
+    adicionarProduto(produto, qtd);
 
-    // Aqui você pode salvar no localStorage, contexto ou API
-    // Exemplo com localStorage:
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ ...produto, quantidade: qtd });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-    // Redireciona para a página do carrinho
-    navigate('/carrinho');
+    setMensagem(`Adicionado ao carrinho!`);
+    setTimeout(() => setMensagem(''), 1000);
   };
 
   return (
     <div className="destaques-container py-5 mt-5">
+      {mensagem && (
+        <div className="toast-mensagem">
+          <span>{mensagem}</span>
+          <div className="barra-progresso"></div>
+        </div>
+      )}
       <div className="container">
         <h2 className="text-center mb-4 text-white">Destaques da Tia</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4">

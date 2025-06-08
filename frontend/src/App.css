@@ -99,7 +99,7 @@ body {
 }
 
 .botao-remover {
-  background-color: #dc3545; /* vermelho Bootstrap */
+  background-color: #dc3545;
   color: white;
   font-weight: bold;
   border: none;
@@ -132,4 +132,90 @@ h2, .lead {
   color: #6c1e3b;
 }
 
+.toast-mensagem {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color:#a20566;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(250, 248, 248, 0.875);
+  z-index: 9999;
+  min-width: 250px;
+  animation: fadeIn 0.1s ease;
+}
+
+.toast-mensagem span {
+  display: block;
+  font-weight: bold;
+}
+
+.barra-progresso {
+  height: 4px;
+  background-color: white;
+  margin-top: 8px;
+  border-radius: 3px;
+  animation: diminuir 1s linear forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes diminuir {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.convite-texto {
+  max-width: 600px;
+}
+
+/* circulo home */
+.circulo-decorativo {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #ffe0ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.circulo-decorativo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+  .circulo-decorativo {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 995px) {
+  .circulo-decorativo {
+    width: 300px;
+    height: 300px;
+  }
+  .convite-texto {
+    width: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .circulo-decorativo {
+    display: none;
+  }
+  .convite-texto {
+    width: 100%;
+  }
+}
 
