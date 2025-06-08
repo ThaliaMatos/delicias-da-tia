@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useCarrinho } from '../context/CarrinhoContext';
 
 export default function Categoria() {
   const { categoria } = useParams();
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantidades, setQuantidades] = useState({});
-  const [mensagem, setMensagem] = useState(''); // estado da mensagem
+  const [mensagem, setMensagem] = useState('');
+  const { adicionarProduto } = useCarrinho(); // <-- usando contexto
 
   const nomesBonitos = {
     bolos: 'Bolos',
@@ -21,7 +23,10 @@ export default function Categoria() {
     axios
       .get('/produto.json')
       .then(res => {
-        const filtrados = res.data.filter(p => p.categoria === nomesBonitos[categoria] || p.categoria.toLowerCase() === categoria);
+        const filtrados = res.data.filter(p => 
+          p.categoria === nomesBonitos[categoria] || 
+          p.categoria.toLowerCase() === categoria
+        );
         setProdutos(filtrados);
       })
       .catch(err => console.error('Erro ao carregar produtos:', err))
@@ -37,17 +42,9 @@ export default function Categoria() {
 
   const adicionarAoCarrinho = (produto) => {
     const quantidade = quantidades[produto.id] || 1;
-    const novoItem = { ...produto, quantidade };
-    const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
-    const existente = carrinhoAtual.find(p => p.id === produto.id);
+    adicionarProduto(produto, quantidade);
 
-    if (existente) existente.quantidade += quantidade;
-    else carrinhoAtual.push(novoItem);
-
-    localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
-
-
-    setMensagem(`Adicionado ao carrinho!`);
+    setMensagem('Adicionado ao carrinho!');
     setTimeout(() => setMensagem(''), 1000);
   };
 
@@ -55,7 +52,6 @@ export default function Categoria() {
 
   return (
     <>
-      {/* Toast mensagem */}
       {mensagem && (
         <div className="toast-mensagem">
           <span>{mensagem}</span>
@@ -63,7 +59,6 @@ export default function Categoria() {
         </div>
       )}
 
-      {/* Conteúdo principal */}
       <div className="container mt-4">
         <h2 className="mb-4">{nomesBonitos[categoria] || categoria}</h2>
 
@@ -82,8 +77,11 @@ export default function Categoria() {
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{produto.nome}</h5>
                   <p className="card-text flex-grow-1">{produto.descricao}</p>
+
                   <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
-                    <p className="preco-produto mb-2 me-auto fw-bold">R$ {produto.preco.toFixed(2)}</p>
+                    <p className="preco-produto mb-2 me-auto fw-bold">
+                      R$ {produto.preco.toFixed(2)}
+                    </p>
 
                     <div className="controle-quantidade d-flex align-items-center">
                       <button onClick={() => alterarQuantidade(produto.id, (quantidades[produto.id] || 1) - 1)}>
