@@ -5,6 +5,17 @@ header {
     right: 0px;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+.navbar {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
 /* etilo dos ícones de redes sociais */
 .social-icons {
     position: fixed; /* Fixa os ícones na tela */

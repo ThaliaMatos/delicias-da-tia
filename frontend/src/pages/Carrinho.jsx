@@ -37,14 +37,27 @@ export default function Carrinho() {
   };
 
   const gerarMensagemWhatsApp = () => {
-    const mensagem = carrinho.map(item => 
+    return carrinho.map(item =>
       `🍰 ${item.nome} (x${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}`
     ).join('\n');
+  };
 
+  const enviarPedido = () => {
+    if (carrinho.length === 0) {
+      alert('O carrinho está vazio.');
+      return;
+    }
+
+    const mensagem = gerarMensagemWhatsApp();
     const total = calcularTotal();
     const textoFinal = `${mensagem}\n\nTotal: R$ ${total}`;
-    const link = `https://wa.me/5579998821048?text=${encodeURIComponent(textoFinal)}`; // troque pelo seu número
+
+    const link = `https://wa.me/5579998821048?text=${encodeURIComponent(textoFinal)}`;
     window.open(link, '_blank');
+
+    // Limpa o carrinho após envio
+    setCarrinho([]);
+    localStorage.removeItem('carrinho');
   };
 
   return (
@@ -63,18 +76,20 @@ export default function Carrinho() {
                   <span className="text-muted">R$ {item.preco.toFixed(2)} x {item.quantidade} = <strong>R$ {(item.preco * item.quantidade).toFixed(2)}</strong></span>
                 </div>
 
-                <div className="btn-group" role="group">
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => diminuirQuantidade(index)}>-</button>
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => aumentarQuantidade(index)}>+</button>
-                  <button className="btn btn-outline-danger btn-sm" onClick={() => removerItem(index)}>🗑️</button>
+                <div className="controle-quantidade">
+                  <button className="botao-quantidade" onClick={() => diminuirQuantidade(index)}>-</button>
+                  <span>{item.quantidade}</span>
+                  <button className="botao-quantidade" onClick={() => aumentarQuantidade(index)}>+</button>
+                  <button className="botao-remover" onClick={() => removerItem(index)}>🗑️</button>
                 </div>
+
               </li>
             ))}
           </ul>
 
           <h4>Total: R$ {calcularTotal()}</h4>
 
-          <button className="btn btn-success mt-3" onClick={gerarMensagemWhatsApp}>
+          <button className="btn btn-success mt-3" onClick={enviarPedido}>
             Enviar Pedido pelo WhatsApp
           </button>
         </>

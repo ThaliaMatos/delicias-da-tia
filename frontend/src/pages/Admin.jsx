@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 // Categorias fixas
 const CATEGORIAS_FIXAS = [
@@ -30,10 +32,10 @@ export default function Admin() {
     if (!estaLogada) {
       navigate('/login');
     } else {
-      fetch('/produto.json')
-        .then((res) => res.json())
-        .then((data) => setProdutos(data))
-        .catch(() => alert('Erro ao carregar produtos'));
+      axios
+      .get('/produto.json')
+      .then((res) => setProdutos(res.data))
+      .catch(() => alert('Erro ao carregar produtos'));
     }
   }, [navigate]);
 

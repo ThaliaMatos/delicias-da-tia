@@ -1,0 +1,17 @@
+.destaques-container {
+    background: linear-gradient(to right, #efdda5, #f9cbcb);
+    border-radius: 16px;
+  }
+  
+  .btn-pink {
+    background-color: #a20566;
+    color: white;
+    border: none;
+    transition: 0.3s;
+  }
+  
+  .btn-pink:hover {
+    background-color: #5f5658;
+    color: white;
+  }
+  

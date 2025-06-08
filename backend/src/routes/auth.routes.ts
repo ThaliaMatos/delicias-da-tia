@@ -5,7 +5,7 @@ const router = Router();
 router.post('/login', (req: Request, res: Response) => {
   const { email, senha } = req.body;
 
-  if (email === 'tia@delicias.com' && senha === '123456') {
+  if (email === 'tia@d.com' && senha === '123456') {
     // Envia token junto com a mensagem
     return res.status(200).json({ 
       mensagem: 'Logado', 

@@ -98,3 +98,38 @@ body {
   padding: 6px 16px;
 }
 
+.botao-remover {
+  background-color: #dc3545; /* vermelho Bootstrap */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card.h-100 {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-primary {
+  background-color: #e83e8c;
+  border-color: #e83e8c;
+}
+
+.btn-primary:hover {
+  background-color: #d63384;
+  border-color: #d63384;
+}
+
+h2, .lead {
+  color: #6c1e3b;
+}
+
+

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Categoria() {
     const { categoria } = useParams();
@@ -7,8 +8,6 @@ export default function Categoria() {
     const [loading, setLoading] = useState(true);
     const [quantidades, setQuantidades] = useState({});
 
-
-    // Mapeamento para nomes "bonitos" das categorias
     const nomesBonitos = {
         bolos: 'Bolos',
         amanteigados: 'Amanteigados',
@@ -18,17 +17,14 @@ export default function Categoria() {
     };
 
     useEffect(() => {
-        fetch('/public/produto.json')
-            .then(res => res.json())
-            .then(data => {
-                const filtrados = data.filter(p => p.categoria === categoria);
+        axios
+            .get('/produto.json')
+            .then(res => {
+                const filtrados = res.data.filter(p => p.categoria === nomesBonitos[categoria] || p.categoria.toLowerCase() === categoria);
                 setProdutos(filtrados);
-                setLoading(false);
             })
-            .catch(err => {
-                console.error('Erro ao carregar produtos:', err);
-                setLoading(false);
-            });
+            .catch(err => console.error('Erro ao carregar produtos:', err))
+            .finally(() => setLoading(false));
     }, [categoria]);
 
     const alterarQuantidade = (id, novaQtd) => {
@@ -38,81 +34,66 @@ export default function Categoria() {
         }));
     };
 
-
-
-
-    if (loading) {
-        return <div className="container mt-4">Carregando produtos...</div>;
-    }
-
     const adicionarAoCarrinho = (produto) => {
         const quantidade = quantidades[produto.id] || 1;
-
-        const novoItem = {
-            ...produto,
-            quantidade
-        };
-
+        const novoItem = { ...produto, quantidade };
         const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
-
         const existente = carrinhoAtual.find(p => p.id === produto.id);
 
-        if (existente) {
-            existente.quantidade += quantidade;
-        } else {
-            carrinhoAtual.push(novoItem);
-        }
+        if (existente) existente.quantidade += quantidade;
+        else carrinhoAtual.push(novoItem);
 
         localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
         alert('Produto adicionado ao carrinho!');
     };
 
-
-
+    if (loading) return <div className="container mt-4">Carregando produtos...</div>;
 
     return (
         <div className="container mt-4">
-            <h2>{nomesBonitos[categoria] || categoria}</h2>
-            <div className="row">
-                {produtos.length === 0 && <p>Nenhum produto encontrado para essa categoria.</p>}
+            <h2 className="mb-4">{nomesBonitos[categoria] || categoria}</h2>
+
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+                {produtos.length === 0 && <p>Nenhum produto encontrado.</p>}
 
                 {produtos.map((produto) => (
-                    <div className="col-md-4" key={produto.id}>
-                        <div className="card mb-4">
-                            <img src={produto.imagem} className="card-img-top" alt={produto.nome} />
-                            <div className="card-body">
+                    <div className="col" key={produto.id}>
+                        <div className="card h-100 shadow-sm">
+                            <img src={produto.imagem} className="card-img-top" alt={produto.nome} style={{ objectFit: 'cover', height: '200px' }} />
+                            <div className="card-body d-flex flex-column">
                                 <h5 className="card-title">{produto.nome}</h5>
-                                <p className="card-text">{produto.descricao}</p>
-                                <p className="card-text fw-bold">R$ {produto.preco.toFixed(2)}</p>
+                                <p className="card-text flex-grow-1">{produto.descricao}</p>
+                                <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                                    <p className="preco-produto mb-2 me-auto fw-bold">R$ {produto.preco.toFixed(2)}</p>
 
-                                <div className="controle-quantidade">
-                                    <button onClick={() =>
-                                        alterarQuantidade(produto.id, (quantidades[produto.id] || 1) - 1)
-                                    }>
-                                        −
-                                    </button>
+                                    <div className="controle-quantidade d-flex align-items-center">
+                                        <button onClick={() =>
+                                            alterarQuantidade(produto.id, (quantidades[produto.id] || 1) - 1)
+                                        }>
+                                            −
+                                        </button>
 
-                                    <span>{quantidades[produto.id] || 1}</span>
+                                        <span>{quantidades[produto.id] || 1}</span>
 
-                                    <button onClick={() =>
-                                        alterarQuantidade(produto.id, (quantidades[produto.id] || 1) + 1)
-                                    }>
-                                        +
-                                    </button>
+                                        <button onClick={() =>
+                                            alterarQuantidade(produto.id, (quantidades[produto.id] || 1) + 1)
+                                        }>
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
 
+
                                 <button
-                                    className="botao-carrinho"
+                                    className="botao-carrinho mx-auto mt-auto"
                                     onClick={() => adicionarAoCarrinho(produto)}
                                 >
                                     Adicionar ao Carrinho
                                 </button>
-
                             </div>
                         </div>
                     </div>
                 ))}
-
             </div>
         </div>
     );
