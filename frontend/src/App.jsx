@@ -15,6 +15,7 @@ import Feedback from './pages/Feedback';
 import BlogReceitas from './pages/BlogReceitas';
 import Faq from './pages/Faq';
 import BotaoCarrinhoFlutuante from './components/BotaoCarrinhoFlutuante/index';
+import PrivateRoute from './components/PrivateRoute';
 
 
 function App() {
@@ -45,8 +46,17 @@ function App() {
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/blog" element={<BlogReceitas />} />
             <Route path="/faq" element={<Faq />} />
+
             <Route path="/login" element={<Login setLogada={setLogada} />} />
-            <Route path="/admin" element={<Admin />} />
+
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoute logada={logada}>
+                  <Admin />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </main>
         <BotaoCarrinhoFlutuante />
