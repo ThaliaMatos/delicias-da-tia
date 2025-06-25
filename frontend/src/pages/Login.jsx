@@ -12,9 +12,9 @@ export default function Login({ setLogada }) {
     e.preventDefault();
 
     try {
-      const resposta = await axios.post('http://localhost:3000/api/login', {
+      const resposta = await axios.post('http://localhost:3333/api/login', {
         email,
-        senha,
+        password: senha,
       });
 
       const token = resposta.data.token;

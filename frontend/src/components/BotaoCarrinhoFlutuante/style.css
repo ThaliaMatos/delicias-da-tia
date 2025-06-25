@@ -1,0 +1,48 @@
+.botao-flutuante-wrapper {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 999;
+  }
+  
+  .botao-flutuante {
+    width: 60px;
+    height: 60px;
+    background-color: #a20566;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .badge-cima {
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .badge-baixo {
+    position: absolute;
+    top: 90%;
+    right: 1px;
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: 20%;
+    z-index: 1;
+  }
+  

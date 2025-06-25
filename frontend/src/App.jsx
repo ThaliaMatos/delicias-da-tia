@@ -14,6 +14,8 @@ import Categoria from './pages/Categoria';
 import Feedback from './pages/Feedback';
 import BlogReceitas from './pages/BlogReceitas';
 import Faq from './pages/Faq';
+import BotaoCarrinhoFlutuante from './components/BotaoCarrinhoFlutuante/index';
+
 
 function App() {
   const [logada, setLogada] = useState(false);
@@ -47,6 +49,7 @@ function App() {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
+        <BotaoCarrinhoFlutuante />
         <Footer logada={logada} setLogada={setLogada} />
       </div>
     </>

@@ -33,9 +33,9 @@ export default function Admin() {
       navigate('/login');
     } else {
       axios
-      .get('/produto.json')
-      .then((res) => setProdutos(res.data))
-      .catch(() => alert('Erro ao carregar produtos'));
+        .get('/produto.json')
+        .then((res) => setProdutos(res.data))
+        .catch(() => alert('Erro ao carregar produtos'));
     }
   }, [navigate]);
 
@@ -62,7 +62,7 @@ export default function Admin() {
   function handleSalvarProduto(e) {
     e.preventDefault();
 
-    if (!nome || !descricao || !categoria) {
+    if (!nome || !descricao || !categoria || !preco) {
       alert('Preencha todos os campos');
       return;
     }
@@ -73,13 +73,13 @@ export default function Admin() {
         produtosAntigos.map((p) =>
           p.id === idEditar
             ? {
-                ...p,
-                nome,
-                descricao,
-                preco,
-                imagem: imagemBase64 || p.imagem,
-                categoria,
-              }
+              ...p,
+              nome,
+              descricao,
+              preco,
+              imagem: imagemBase64 || p.imagem,
+              categoria,
+            }
             : p
         )
       );
@@ -124,7 +124,7 @@ export default function Admin() {
   function renderConteudo() {
     if (secao === 'cadastrar') {
       return (
-        <div className="card p-4 mt-4 shadow">
+        <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
           <h4 className="mb-3">{idEditar !== null ? 'Editar Produto' : 'Cadastrar Novo Produto'}</h4>
           <form onSubmit={handleSalvarProduto}>
             <div className="mb-3">
@@ -235,22 +235,22 @@ export default function Admin() {
             </select>
           </div>
 
-          <div className="row">
+          <div className="row g-4">
             {produtosFiltrados.map((produto) => (
               <div className="col-md-4" key={produto.id}>
-                <div className="card shadow-sm mb-3">
+                <div className="card h-100 d-flex flex-column shadow">
                   <img
                     src={produto.imagem}
                     className="card-img-top"
                     alt={produto.nome}
                     style={{ maxHeight: '200px', objectFit: 'cover' }}
                   />
-                  <div className="card-body">
+                  <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{produto.nome}</h5>
                     <p className="card-text">{produto.descricao}</p>
                     <span className="badge bg-secondary">{produto.categoria}</span>
                     <p className="mt-2 fw-bold">R$ {parseFloat(produto.preco).toFixed(2)}</p>
-                    <div className="mt-3 d-flex justify-content-between">
+                    <div className="mt-auto d-flex justify-content-start gap-2">
                       <button
                         className="btn btn-sm btn-primary"
                         onClick={() => handleEditarProduto(produto)}
@@ -280,21 +280,21 @@ export default function Admin() {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-4">
       <h2 className="text-center mb-5" style={{ color: '#a20566' }}>
         Painel Administrativo da Tia
       </h2>
 
-      <div className="row justify-content-center g-4">
+      <div className="row justify-content-center align-items-stretch g-4">
         <div
-          className="col-md-6 col-lg-4"
+          className="col-md-6 col-lg-4 mb-4"
           onClick={() => {
             limparFormulario();
             setSecao('cadastrar');
           }}
           style={{ cursor: 'pointer' }}
         >
-          <div className="card h-100 text-center shadow card-opcao">
+          <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
             <div className="card-body">
               <h5 className="card-title">📥 Cadastrar Produto</h5>
               <p className="card-text">Adicione novas delícias ao cardápio</p>
@@ -303,11 +303,11 @@ export default function Admin() {
         </div>
 
         <div
-          className="col-md-6 col-lg-4"
+          className="col-md-6 col-lg-4 mb-4"
           onClick={() => setSecao('ver')}
           style={{ cursor: 'pointer' }}
         >
-          <div className="card h-100 text-center shadow card-opcao">
+          <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
             <div className="card-body">
               <h5 className="card-title">📋 Ver Produtos</h5>
               <p className="card-text">Visualize os produtos cadastrados</p>

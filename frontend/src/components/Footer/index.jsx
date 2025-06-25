@@ -12,7 +12,7 @@ export default function Footer({ logada, setLogada }) {
   }
 
   return (
-    <footer className="bg-pink text-white pt-4 pb-2">
+    <footer className="rodape bg-pink pt-4 pb-2">
       <div className="container text-center text-md-start">
         <div className="row">
           {/* Sobre a loja */}

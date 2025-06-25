@@ -1,15 +1,9 @@
 import './style.css';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { useCarrinho } from '../../context/CarrinhoContext';
 
 export default function Header() {
-    const { carrinho } = useCarrinho();
-
     const logada = localStorage.getItem('logada') === 'true';
-
-    // Soma total de itens no carrinho
-    const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
 
     return (
         <header className="navbar navbar-expand-lg navbar-light bg-pink">
@@ -43,17 +37,6 @@ export default function Header() {
 
                         <li className="nav-item"><Link className="nav-link" to="/sobre">Sobre Nós</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contato">Contato</Link></li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link position-relative" to="/carrinho">
-                                <i className="bi bi-cart3"></i>
-                                {totalItens > 0 && (
-                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {totalItens}
-                                    </span>
-                                )}
-                            </Link>
-                        </li>
 
                         {logada && (
                             <li className="nav-item">

@@ -70,7 +70,7 @@ body {
 /* etilo dos ícones de redes sociais */
 .social-icons {
     position: fixed; /* Fixa os ícones na tela */
-    top: 30%; /* Centraliza verticalmente */
+    top: 90%; /* Centraliza verticalmente */
     right: 10px; /* Distância da borda esquerda */
     transform: translateY(-50%); /* Ajusta o alinhamento */
     z-index: 1000; /* Mantém os ícones sobre o conteúdo */
@@ -92,5 +92,3 @@ body {
     background-color: #a20566; /* Cor ao passar o mouse */
     color: #fff; /* Cor do ícone ao passar o mouse */
 }
-
-
