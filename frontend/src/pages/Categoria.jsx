@@ -23,8 +23,8 @@ export default function Categoria() {
     axios
       .get('/produto.json')
       .then(res => {
-        const filtrados = res.data.filter(p => 
-          p.categoria === nomesBonitos[categoria] || 
+        const filtrados = res.data.filter(p =>
+          p.categoria === nomesBonitos[categoria] ||
           p.categoria.toLowerCase() === categoria
         );
         setProdutos(filtrados);
@@ -69,11 +69,11 @@ export default function Categoria() {
             <div className="col" key={produto.id}>
               <div className="card h-100 shadow-sm">
                 <img
-                  src={produto.imagem}
+                  src={produto.imagem ? `http://localhost:3333/uploads/${produto.imagem}` : 'https://via.placeholder.com/300x200'}
                   className="card-img-top"
                   alt={produto.nome}
-                  style={{ objectFit: 'cover', height: '200px' }}
                 />
+
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{produto.nome}</h5>
                   <p className="card-text flex-grow-1">{produto.descricao}</p>

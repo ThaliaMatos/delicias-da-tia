@@ -32,8 +32,14 @@ export default function Admin() {
     if (!estaLogada) {
       navigate('/login');
     } else {
+      const token = localStorage.getItem('token');
+
       axios
-        .get('/produto.json')
+        .get('http://localhost:3333/api/produtos', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => setProdutos(res.data))
         .catch(() => alert('Erro ao carregar produtos'));
     }
@@ -59,7 +65,7 @@ export default function Admin() {
     setPreco('');
   }
 
-  function handleSalvarProduto(e) {
+  async function handleSalvarProduto(e) {
     e.preventDefault();
 
     if (!nome || !descricao || !categoria || !preco) {
@@ -67,40 +73,62 @@ export default function Admin() {
       return;
     }
 
-    if (idEditar !== null) {
-      // Editar produto existente
-      setProdutos((produtosAntigos) =>
-        produtosAntigos.map((p) =>
-          p.id === idEditar
-            ? {
-              ...p,
-              nome,
-              descricao,
-              preco,
-              imagem: imagemBase64 || p.imagem,
-              categoria,
-            }
-            : p
-        )
-      );
-      alert('Produto atualizado com sucesso!');
-    } else {
-      // Cadastrar novo produto
-      const novoProduto = {
-        id: produtos.length > 0 ? Math.max(...produtos.map((p) => p.id)) + 1 : 1,
-        nome,
-        descricao,
-        preco: parseFloat(preco).toFixed(2),
-        imagem: imagemBase64 || 'https://via.placeholder.com/300x200',
-        categoria,
-      };
-      setProdutos([...produtos, novoProduto]);
-      alert('Produto cadastrado com sucesso!');
-    }
+    const token = localStorage.getItem('token');
 
-    limparFormulario();
-    setSecao('ver');
+  const formData = new FormData();
+  formData.append('nome', nome);
+  formData.append('descricao', descricao);
+  formData.append('categoria', categoria);
+  formData.append('preco', preco);
+
+  const imagemFile = e.target.img?.files[0];
+  if (imagemFile) {
+    formData.append('img', imagemFile);
   }
+
+    try {
+      let res;
+
+      if (idEditar !== null) {
+        res = await axios.put(
+          `http://localhost:3333/api/produtos/${idEditar}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+      } else {
+        res = await axios.post('http://localhost:3333/api/produtos', formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      }
+
+      const produtoAtualizado = res.data;
+
+      setProdutos((produtosAntigos) => {
+        if (idEditar !== null) {
+          return produtosAntigos.map((p) =>
+            p.id === idEditar ? produtoAtualizado : p
+          );
+        }
+        return [...produtosAntigos, produtoAtualizado];
+      });
+
+      alert(idEditar !== null ? 'Produto atualizado!' : 'Produto cadastrado!');
+      limparFormulario();
+      setSecao('ver');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao salvar produto');
+    }
+  }
+
 
   function handleEditarProduto(produto) {
     setSecao('cadastrar');
@@ -112,14 +140,26 @@ export default function Admin() {
     setPreco(produto.preco);
   }
 
-  function handleExcluirProduto(id) {
-    if (window.confirm('Tem certeza que deseja excluir este produto?')) {
-      setProdutos(produtos.filter((p) => p.id !== id));
-      if (secao === 'ver') {
-        alert('Produto excluído com sucesso!');
-      }
+  async function handleExcluirProduto(id) {
+    if (!window.confirm('Tem certeza que deseja excluir este produto?')) return;
+
+    const token = localStorage.getItem('token');
+
+    try {
+      await axios.delete(`http://localhost:3333/api/produtos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setProdutos((produtosAntigos) => produtosAntigos.filter((p) => p.id !== id));
+      alert('Produto excluído com sucesso!');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao excluir produto');
     }
   }
+
 
   function renderConteudo() {
     if (secao === 'cadastrar') {
@@ -179,10 +219,12 @@ export default function Admin() {
               <label className="form-label">Imagem do Produto</label>
               <input
                 type="file"
+                name="img"
                 className="form-control"
-                accept="image/*"
+                accept="imagem/*"
                 onChange={handleImagemChange}
               />
+
               {imagemBase64 && (
                 <img
                   src={imagemBase64}
@@ -240,11 +282,11 @@ export default function Admin() {
               <div className="col-md-4" key={produto.id}>
                 <div className="card h-100 d-flex flex-column shadow">
                   <img
-                    src={produto.imagem}
-                    className="card-img-top"
+                    src={produto.imagem ? `http://localhost:3333/uploads/${produto.imagem}` : 'https://via.placeholder.com/300x200'}
                     alt={produto.nome}
                     style={{ maxHeight: '200px', objectFit: 'cover' }}
                   />
+
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{produto.nome}</h5>
                     <p className="card-text">{produto.descricao}</p>
