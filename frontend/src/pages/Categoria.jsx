@@ -21,7 +21,7 @@ export default function Categoria() {
 
   useEffect(() => {
     axios
-      .get('/produto.json')
+      .get('http://localhost:3333/api/produtos')
       .then(res => {
         const filtrados = res.data.filter(p =>
           p.categoria === nomesBonitos[categoria] ||
