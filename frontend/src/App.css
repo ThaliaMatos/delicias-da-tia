@@ -219,3 +219,147 @@ h2, .lead {
   }
 }
 
+/* cards Adm */
+.card-admin {
+  position: relative;
+  background: #111;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  transition: transform 0.3s ease;
+  user-select: none;
+  box-shadow: 0 0 10px #000 inset;
+}
+
+.card-admin-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-admin-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.card-admin-desc {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Glow effect wrapper */
+.card-admin::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  background-size: 400%;
+  filter: blur(5px);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: -1;
+  animation: glowing 20s linear infinite;
+}
+
+/* Inner background so text stays readable */
+.card-admin::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Hover: glow appears and card lifts */
+.card-admin:hover::before {
+  opacity: 1;
+}
+
+.card-admin:hover {
+  transform: translateY(-6px);
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+
+/* formulário de cadatrar produtos */
+
+.form-box {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.form-box .form-label {
+  font-weight: bold;
+  color: #a20566;
+}
+
+.form-box .form-control,
+.form-box .form-select,
+.form-box textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+.form-box .form-control:focus,
+.form-box .form-select:focus,
+.form-box textarea:focus {
+  border-color: #a20566;
+  box-shadow: 0 0 5px rgba(162, 5, 102, 0.3);
+}
+
+.btn-tia {
+  background-color: #a20566;
+  color: #fff;
+  border: none;
+}
+
+.btn-tia:hover {
+  background-color: #87014e;
+}
+
+.preview-imagem {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+}

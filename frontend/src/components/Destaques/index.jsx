@@ -12,17 +12,38 @@ export default function Destaques() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/produto.json')
-      .then((res) => {
-        const destaques = res.data.slice(0, 3);
-        setProdutos(destaques);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
 
+    // Buscar todos os produtos do backend
+    axios
+      .get('http://localhost:3333/api/produtos', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const produtosTodos = res.data;
+
+        // Pega do localStorage os IDs dos produtos destacados
+        const destaquesIds = JSON.parse(localStorage.getItem('destaques') || '[]');
+
+        // Filtra apenas os produtos destacados
+        const produtosDestaques = produtosTodos.filter((p) => destaquesIds.includes(p.id));
+
+        setProdutos(produtosDestaques);
+
+        // Inicializa as quantidades para cada produto destacado
         const quantidadesIniciais = {};
-        destaques.forEach(p => quantidadesIniciais[p.id] = 1);
+        produtosDestaques.forEach((p) => (quantidadesIniciais[p.id] = 1));
         setQuantidades(quantidadesIniciais);
       })
-      .catch((err) => console.error('Erro ao carregar produtos:', err));
-  }, []);
+      .catch((err) => {
+        console.error('Erro ao carregar produtos:', err);
+        alert('Erro ao carregar produtos destacados');
+      });
+  }, [navigate]);
 
   const alterarQuantidade = (id, novaQtd) => {
     if (novaQtd < 1) return;
@@ -48,11 +69,18 @@ export default function Destaques() {
       <div className="container">
         <h2 className="text-center mb-4 text-white">Destaques da Tia</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4">
+          {produtos.length === 0 && (
+            <p className="text-center text-white">Nenhum produto destacado no momento.</p>
+          )}
           {produtos.map((produto) => (
             <div className="col" key={produto.id}>
               <div className="card h-100 shadow-sm">
                 <img
-                  src={produto.imagem}
+                  src={
+                    produto.imagem
+                      ? `http://localhost:3333/uploads/${produto.imagem}`
+                      : 'https://via.placeholder.com/300x200'
+                  }
                   className="card-img-top"
                   alt={produto.nome}
                   style={{ objectFit: 'cover', height: '200px' }}
@@ -63,7 +91,7 @@ export default function Destaques() {
 
                   <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
                     <p className="preco-produto mb-2 me-auto fw-bold">
-                      R$ {produto.preco.toFixed(2)}
+                      R$ {parseFloat(produto.preco).toFixed(2)}
                     </p>
 
                     <div className="controle-quantidade d-flex align-items-center">

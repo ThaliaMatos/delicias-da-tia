@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
-// Categorias fixas
 const CATEGORIAS_FIXAS = [
   'Amanteigados',
   'Bolo',
@@ -14,12 +12,10 @@ const CATEGORIAS_FIXAS = [
 
 export default function Admin() {
   const navigate = useNavigate();
-
   const [secao, setSecao] = useState(null);
   const [produtos, setProdutos] = useState([]);
   const [categoriaFiltro, setCategoriaFiltro] = useState('todas');
 
-  // Estados do formulário
   const [idEditar, setIdEditar] = useState(null);
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -27,32 +23,31 @@ export default function Admin() {
   const [imagemBase64, setImagemBase64] = useState('');
   const [categoria, setCategoria] = useState('');
 
+  const [destaquesSelecionados, setDestaquesSelecionados] = useState(() => {
+    const salvos = localStorage.getItem('destaques');
+    return salvos ? JSON.parse(salvos) : [];
+  });
+
   useEffect(() => {
     const estaLogada = localStorage.getItem('logada') === 'true';
     if (!estaLogada) {
       navigate('/login');
-    } else {
-      const token = localStorage.getItem('token');
-
-      axios
-        .get('http://localhost:3333/api/produtos', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => setProdutos(res.data))
-        .catch(() => alert('Erro ao carregar produtos'));
+      return;
     }
+    const token = localStorage.getItem('token');
+    axios
+      .get('http://localhost:3333/api/produtos', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setProdutos(res.data))
+      .catch(() => alert('Erro ao carregar produtos'));
   }, [navigate]);
 
   function handleImagemChange(e) {
     const file = e.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagemBase64(reader.result.toString());
-    };
+    reader.onloadend = () => setImagemBase64(reader.result.toString());
     reader.readAsDataURL(file);
   }
 
@@ -75,16 +70,16 @@ export default function Admin() {
 
     const token = localStorage.getItem('token');
 
-  const formData = new FormData();
-  formData.append('nome', nome);
-  formData.append('descricao', descricao);
-  formData.append('categoria', categoria);
-  formData.append('preco', preco);
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('descricao', descricao);
+    formData.append('categoria', categoria);
+    formData.append('preco', preco);
 
-  const imagemFile = e.target.img?.files[0];
-  if (imagemFile) {
-    formData.append('img', imagemFile);
-  }
+    const imagemFile = e.target.img?.files[0];
+    if (imagemFile) {
+      formData.append('img', imagemFile);
+    }
 
     try {
       let res;
@@ -128,44 +123,61 @@ export default function Admin() {
       alert('Erro ao salvar produto');
     }
   }
-
+  
 
   function handleEditarProduto(produto) {
     setSecao('cadastrar');
     setIdEditar(produto.id);
     setNome(produto.nome);
     setDescricao(produto.descricao);
-    setImagemBase64(produto.imagem);
+    setImagemBase64(produto.imagem ? `http://localhost:3333/uploads/${produto.imagem}` : '');
     setCategoria(produto.categoria);
     setPreco(produto.preco);
   }
 
   async function handleExcluirProduto(id) {
-    if (!window.confirm('Tem certeza que deseja excluir este produto?')) return;
-
+    if (!window.confirm('Deseja excluir este produto?')) return;
     const token = localStorage.getItem('token');
 
     try {
       await axios.delete(`http://localhost:3333/api/produtos/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
+      setProdutos((prodAnt) => prodAnt.filter((p) => p.id !== id));
+      alert('Produto excluído!');
 
-      setProdutos((produtosAntigos) => produtosAntigos.filter((p) => p.id !== id));
-      alert('Produto excluído com sucesso!');
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao excluir produto');
+      if (destaquesSelecionados.includes(id)) {
+        const novos = destaquesSelecionados.filter((pid) => pid !== id);
+        setDestaquesSelecionados(novos);
+        localStorage.setItem('destaques', JSON.stringify(novos));
+      }
+    } catch (err) {
+      alert('Erro ao excluir');
     }
   }
 
+  function alternarDestaque(id) {
+    let novos;
+    if (destaquesSelecionados.includes(id)) {
+      novos = destaquesSelecionados.filter((pid) => pid !== id);
+    } else {
+      if (destaquesSelecionados.length >= 3) {
+        alert('Máximo de 3 destaques!');
+        return;
+      }
+      novos = [...destaquesSelecionados, id];
+    }
+    setDestaquesSelecionados(novos);
+    localStorage.setItem('destaques', JSON.stringify(novos));
+  }
 
   function renderConteudo() {
     if (secao === 'cadastrar') {
       return (
-        <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
-          <h4 className="mb-3">{idEditar !== null ? 'Editar Produto' : 'Cadastrar Novo Produto'}</h4>
+        <div className="form-box">
+          <h4 className="mb-4 text-center" style={{ color: '#a20566' }}>
+            {idEditar ? 'Editar Produto' : 'Cadastrar Produto'}
+          </h4>
           <form onSubmit={handleSalvarProduto}>
             <div className="mb-3">
               <label className="form-label">Nome do Produto</label>
@@ -195,9 +207,9 @@ export default function Admin() {
                 onChange={(e) => setCategoria(e.target.value)}
                 required
               >
-                <option value="">Selecione uma categoria</option>
-                {CATEGORIAS_FIXAS.map((cat, i) => (
-                  <option key={i} value={cat}>
+                <option value="">Selecione</option>
+                {CATEGORIAS_FIXAS.map((cat) => (
+                  <option key={cat} value={cat}>
                     {cat}
                   </option>
                 ))}
@@ -211,41 +223,37 @@ export default function Admin() {
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
                 required
-                min="0"
                 step="0.01"
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Imagem do Produto</label>
+              <label className="form-label">Imagem</label>
               <input
                 type="file"
                 name="img"
                 className="form-control"
-                accept="imagem/*"
+                accept="image/*"
                 onChange={handleImagemChange}
               />
-
               {imagemBase64 && (
-                <img
-                  src={imagemBase64}
-                  alt="Preview"
-                  style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }}
-                />
+                <img src={imagemBase64} className="preview-imagem mt-2" alt="Preview" style={{ maxWidth: '100%' }} />
               )}
             </div>
-            <button type="submit" className="btn btn-tia me-2">
-              {idEditar !== null ? 'Atualizar' : 'Salvar'}
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => {
-                limparFormulario();
-                setSecao('ver');
-              }}
-            >
-              Cancelar
-            </button>
+            <div className="d-flex justify-content-center gap-3 mt-4">
+              <button type="submit" className="btn btn-tia px-4">
+                {idEditar ? 'Atualizar' : 'Salvar'}
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary px-4"
+                onClick={() => {
+                  limparFormulario();
+                  setSecao('ver');
+                }}
+              >
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       );
@@ -253,7 +261,6 @@ export default function Admin() {
 
     if (secao === 'ver') {
       const categoriasUnicas = ['todas', ...CATEGORIAS_FIXAS];
-
       const produtosFiltrados =
         categoriaFiltro === 'todas'
           ? produtos
@@ -269,40 +276,32 @@ export default function Admin() {
               value={categoriaFiltro}
               onChange={(e) => setCategoriaFiltro(e.target.value)}
             >
-              {categoriasUnicas.map((cat, i) => (
-                <option key={i} value={cat}>
+              {categoriasUnicas.map((cat) => (
+                <option key={cat} value={cat}>
                   {cat === 'todas' ? 'Todas as categorias' : cat}
                 </option>
               ))}
             </select>
           </div>
-
           <div className="row g-4">
-            {produtosFiltrados.map((produto) => (
-              <div className="col-md-4" key={produto.id}>
+            {produtosFiltrados.map((p) => (
+              <div className="col-md-4" key={p.id}>
                 <div className="card h-100 d-flex flex-column shadow">
                   <img
-                    src={produto.imagem ? `http://localhost:3333/uploads/${produto.imagem}` : 'https://via.placeholder.com/300x200'}
-                    alt={produto.nome}
-                    style={{ maxHeight: '200px', objectFit: 'cover' }}
+                    src={p.imagem ? `http://localhost:3333/uploads/${p.imagem}` : 'https://via.placeholder.com/300x200'}
+                    alt={p.nome}
+                    style={{ maxHeight: '300px', objectFit: 'cover' }}
                   />
-
                   <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">{produto.nome}</h5>
-                    <p className="card-text">{produto.descricao}</p>
-                    <span className="badge bg-secondary">{produto.categoria}</span>
-                    <p className="mt-2 fw-bold">R$ {parseFloat(produto.preco).toFixed(2)}</p>
-                    <div className="mt-auto d-flex justify-content-start gap-2">
-                      <button
-                        className="btn btn-sm btn-primary"
-                        onClick={() => handleEditarProduto(produto)}
-                      >
+                    <h5 className="card-title">{p.nome}</h5>
+                    <p className="card-text">{p.descricao}</p>
+                    <span className="badge bg-secondary">{p.categoria}</span>
+                    <p className="mt-2 fw-bold">R$ {parseFloat(p.preco).toFixed(2)}</p>
+                    <div className="mt-auto d-flex gap-2">
+                      <button className="btn btn-sm btn-primary" onClick={() => handleEditarProduto(p)}>
                         ✏️ Editar
                       </button>
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => handleExcluirProduto(produto.id)}
-                      >
+                      <button className="btn btn-sm btn-danger" onClick={() => handleExcluirProduto(p.id)}>
                         🗑️ Excluir
                       </button>
                     </div>
@@ -311,8 +310,38 @@ export default function Admin() {
               </div>
             ))}
             {produtosFiltrados.length === 0 && (
-              <p className="text-muted">Nenhum produto encontrado nesta categoria.</p>
+              <p className="text-muted">Nenhum produto nesta categoria.</p>
             )}
+          </div>
+        </div>
+      );
+    }
+
+    if (secao === 'destaques') {
+      return (
+        <div className="mt-4">
+          <h4>Escolha até 3 produtos para destacar</h4>
+          <div className="row g-4 mt-3">
+            {produtos.map((p) => (
+              <div className="col-md-4" key={p.id}>
+                <div className={`card h-100 shadow ${destaquesSelecionados.includes(p.id) ? 'border border-success border-3' : ''}`}>
+                  <img
+                    src={p.imagem ? `http://localhost:3333/uploads/${p.imagem}` : 'https://via.placeholder.com/300x200'}
+                    alt={p.nome}
+                    style={{ maxHeight: '300px', objectFit: 'cover' }}
+                  />
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{p.nome}</h5>
+                    <button
+                      className={`btn ${destaquesSelecionados.includes(p.id) ? 'btn-danger' : 'btn-primary'}`}
+                      onClick={() => alternarDestaque(p.id)}
+                    >
+                      {destaquesSelecionados.includes(p.id) ? 'Remover' : 'Selecionar'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       );
@@ -327,35 +356,20 @@ export default function Admin() {
         Painel Administrativo da Tia
       </h2>
 
-      <div className="row justify-content-center align-items-stretch g-4">
-        <div
-          className="col-md-6 col-lg-4 mb-4"
-          onClick={() => {
-            limparFormulario();
-            setSecao('cadastrar');
-          }}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
-            <div className="card-body">
-              <h5 className="card-title">📥 Cadastrar Produto</h5>
-              <p className="card-text">Adicione novas delícias ao cardápio</p>
+      <div className="row justify-content-center g-4 mb-4">
+        {[
+          { titulo: 'Cadastrar Produto', icone: '📥', acao: () => { limparFormulario(); setSecao('cadastrar'); }, desc: 'Adicione novas delícias ao cardápio' },
+          { titulo: 'Ver Produtos', icone: '📋', acao: () => setSecao('ver'), desc: 'Visualize os produtos cadastrados' },
+          { titulo: 'Escolher Destaques', icone: '🌟', acao: () => setSecao('destaques'), desc: 'Selecione produtos para a vitrine' },
+        ].map(({ titulo, icone, acao, desc }, i) => (
+          <div key={i} className="col-md-6 col-lg-4" onClick={acao} style={{ cursor: 'pointer' }}>
+            <div className="card-admin text-center">
+              <div className="card-admin-icon">{icone}</div>
+              <div className="card-admin-title">{titulo}</div>
+              <div className="card-admin-desc">{desc}</div>
             </div>
           </div>
-        </div>
-
-        <div
-          className="col-md-6 col-lg-4 mb-4"
-          onClick={() => setSecao('ver')}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="card h-100 text-center shadow d-flex flex-column justify-content-center">
-            <div className="card-body">
-              <h5 className="card-title">📋 Ver Produtos</h5>
-              <p className="card-text">Visualize os produtos cadastrados</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       {renderConteudo()}
