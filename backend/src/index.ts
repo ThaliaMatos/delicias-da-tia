@@ -16,7 +16,7 @@ app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 app.use('/api', authRoutes);    // rotas públicas (login, registro)
 app.use('/api/admin', adminRoutes);  // rotas protegidas pelo middleware
-app.use('/api/produtos', produtoRoutes);app.use('/api/produtos', produtoRoutes);//rotas produto
+app.use('/api/produtos', produtoRoutes);//rotas produto
 
 app.listen(3333, () => {
   console.log('Servidor rodando na porta 3333');
