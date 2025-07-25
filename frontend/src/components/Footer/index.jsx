@@ -22,7 +22,7 @@ export default function Footer({ logada, setLogada }) {
 
             <div className="mb-2">
               <Link
-                to="/feedback"
+                to="https://docs.google.com/forms/d/e/1FAIpQLSdY7OkgiS3hxWjDe3lpycf6lkVZ8cuiLN7ug5n16A_JNRJlQA/viewform?usp=header"
                 className="small text-white text-decoration-underline"
                 style={{ fontWeight: 'bold' }}
               >
