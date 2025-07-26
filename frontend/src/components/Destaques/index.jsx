@@ -75,7 +75,7 @@ export default function Destaques() {
                   }
                   className="card-img-top"
                   alt={produto.nome}
-                  style={{ objectFit: 'cover', height: '200px' }}
+                  style={{ objectFit: 'cover', height: '70vh' }}
                 />
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{produto.nome}</h5>

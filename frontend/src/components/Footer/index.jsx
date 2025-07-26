@@ -84,13 +84,15 @@ export default function Footer({ logada, setLogada }) {
             </button>
           </>
         ) : (
-          <Link
-            to="/login"
-            className="small text-white text-decoration-underline"
-            style={{ fontWeight: 'bold' }}
+          <a
+            href="/login"
+            className="small link-personalizado"
+            onClick={() => {
+              window.location.href = '/login';
+            }}
           >
             Área Administrativa
-          </Link>
+          </a>
         )}
       </div>
     </footer>

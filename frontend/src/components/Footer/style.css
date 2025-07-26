@@ -2,7 +2,6 @@
     color: #a20566;
     padding: 1rem 0;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.527);
-  
     text-align: center;
     font-weight: 400;
     letter-spacing: 0.5px;
@@ -10,12 +9,21 @@
 
 a {
     color: #a20566;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #f5f2f4;
+    color: #3c072b;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
+
+.link-personalizado {
+    color: white;
+  }
+  
+  .link-personalizado:hover {
+    color: #3c072b;
+  }
 
 .feedback-btn {
     display: inline-block;

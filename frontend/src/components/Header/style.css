@@ -114,21 +114,7 @@ color: #a20566;
     color: #fff; /* Cor do ícone ao passar o mouse */
 }
 
-/* Linha separadora logo abaixo do topo */
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  width: 100%;
-}
 
-.header-separator {
-  width: 100%;
-  height: 1px;
-  background-color: #f3c8da;
-  margin: 0 auto;
-}
 
 /* Ajusta a logo */
 .logo {
@@ -136,12 +122,19 @@ color: #a20566;
   width: auto;
 }
 
-/* Quando o menu colapsa, deixa os itens lado a lado */
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    padding: 4px 0;
-  }
+/* Dropdown */
+.dropdown-menu .dropdown-item {
+color: #a20566;
+padding: 8px 12px;
+}
 
+.dropdown-menu .dropdown-item:hover {
+background-color: #ffe6f0;
+color: #72144a;
+}
+
+/* Quando o menu colapsa */
+@media (max-width: 991.98px) {
   .navbar-nav {
     display: flex !important;
     flex-direction: column; /* <-- AGORA OS LINKS FICAM UM EMBAIXO DO OUTRO */
@@ -164,21 +157,4 @@ color: #a20566;
     color: #72144a;
   }
 
-  .dropdown-menu {
-    position: static !important;
-    background-color: #fff;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-  }
-
-  .dropdown-menu .dropdown-item {
-    color: #a20566;
-    padding: 8px 12px;
-  }
-
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #ffe6f0;
-    color: #72144a;
-  }
 }
