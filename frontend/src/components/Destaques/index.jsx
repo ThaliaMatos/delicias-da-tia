@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { useCarrinho } from '../../context/CarrinhoContext';
 import './style.css';
 
@@ -9,41 +8,34 @@ export default function Destaques() {
   const [quantidades, setQuantidades] = useState({});
   const [mensagem, setMensagem] = useState('');
   const { adicionarProduto } = useCarrinho();
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+  // Buscar todos os produtos do backend
+  axios
+    .get('http://localhost:3333/api/produtos')
+    .then((res) => {
+      const produtosTodos = res.data;
 
-    // Buscar todos os produtos do backend
-    axios
-      .get('http://localhost:3333/api/produtos', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        const produtosTodos = res.data;
+      // Pega do localStorage os IDs dos produtos destacados
+      const destaquesIds = JSON.parse(localStorage.getItem('destaques') || '[]');
 
-        // Pega do localStorage os IDs dos produtos destacados
-        const destaquesIds = JSON.parse(localStorage.getItem('destaques') || '[]');
+      // Filtra apenas os produtos destacados
+      const produtosDestaques = produtosTodos.filter((p) => destaquesIds.includes(p.id));
 
-        // Filtra apenas os produtos destacados
-        const produtosDestaques = produtosTodos.filter((p) => destaquesIds.includes(p.id));
+      setProdutos(produtosDestaques);
 
-        setProdutos(produtosDestaques);
+      // Inicializa as quantidades para cada produto destacado
+      const quantidadesIniciais = {};
+      produtosDestaques.forEach((p) => (quantidadesIniciais[p.id] = 1));
+      setQuantidades(quantidadesIniciais);
+    })
+    .catch((err) => {
+      console.error('Erro ao carregar produtos:', err);
+      alert('Erro ao carregar produtos destacados');
+    });
+}, []);
 
-        // Inicializa as quantidades para cada produto destacado
-        const quantidadesIniciais = {};
-        produtosDestaques.forEach((p) => (quantidadesIniciais[p.id] = 1));
-        setQuantidades(quantidadesIniciais);
-      })
-      .catch((err) => {
-        console.error('Erro ao carregar produtos:', err);
-        alert('Erro ao carregar produtos destacados');
-      });
-  }, [navigate]);
 
   const alterarQuantidade = (id, novaQtd) => {
     if (novaQtd < 1) return;
