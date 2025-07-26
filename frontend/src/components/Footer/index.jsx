@@ -23,16 +23,17 @@ export default function Footer({ logada, setLogada }) {
             <div className="mb-2">
               <Link
                 to="https://docs.google.com/forms/d/e/1FAIpQLSdY7OkgiS3hxWjDe3lpycf6lkVZ8cuiLN7ug5n16A_JNRJlQA/viewform?usp=header"
-                className="small text-white text-decoration-underline " target='blank'
-                style={{ fontWeight: 'bold' }}
+                target="_blank"
+                rel="noreferrer"
+                className="feedback-btn"
               >
-                Feedback
+                Enviar Feedback
               </Link>
+
               <br />
               <Link
                 to="/faq"
-                className="small text-white text-decoration-underline"
-                style={{ fontWeight: 'bold' }}
+                className="feedback-btn"
               >
                 FAQ
               </Link>

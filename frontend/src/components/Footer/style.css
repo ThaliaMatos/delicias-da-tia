@@ -1,18 +1,37 @@
 .rodape {
-    color: white;
+    color: #a20566;
     padding: 1rem 0;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.527);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.978),0 0 3px rgba(0, 0, 0, 0.8);
+  
     text-align: center;
     font-weight: 400;
     letter-spacing: 0.5px;
 }
 
 a {
-    color: white;
+    color: #a20566;
 }
 
 a:hover {
-    color: #a20566;
+    color: #f5f2f4;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
+
+.feedback-btn {
+    display: inline-block;
+    background-color: white;
+    color: #a20566;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .feedback-btn:hover {
+    background-color: #a20566;
+    color: white;
+    text-shadow: none;
+  }
+  

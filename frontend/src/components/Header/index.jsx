@@ -14,10 +14,9 @@ export default function Header() {
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                   <span className="navbar-toggler-icon">
-  <div></div>
-</span>
-
+                    <span className="navbar-toggler-icon">
+                        <div></div>
+                    </span>
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarNav">
@@ -45,6 +44,7 @@ export default function Header() {
                         )}
                     </ul>
                 </div>
+
 
                 <div className="social-icons">
                     <a href="https://wa.me/qr/ISUKN7JK7E23N1" target="_blank" className="text-decoration-none me-3">

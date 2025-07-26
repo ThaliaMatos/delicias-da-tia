@@ -1,7 +1,10 @@
 html, body {
-  height: 100%;
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
+
 
 body {
   min-height: 100vh;
@@ -22,6 +25,17 @@ body {
 #root {
   height: 100%;
 }
+
+.container-fluid, .container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 15px;  /* padding horizontal para espaçamento interno */
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
 
 .app-container {
   display: flex;
