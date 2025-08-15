@@ -12,9 +12,9 @@ export default function Categoria() {
   const { adicionarProduto } = useCarrinho(); // <-- usando contexto
 
   const nomesBonitos = {
-    bolos: 'Bolos',
+    bolos: 'Bolo',
     amanteigados: 'Amanteigados',
-    boloslowcarb: 'Bolos Low Carb',
+    boloslowcarb: 'Bolo Low Carb',
     docesespeciais: 'Doces Especiais',
     salgados: 'Salgados',
   };

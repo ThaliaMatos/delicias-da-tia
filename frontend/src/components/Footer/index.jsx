@@ -22,16 +22,6 @@ export default function Footer({ logada, setLogada }) {
 
             <div className="mb-2">
               <Link
-                to="https://docs.google.com/forms/d/e/1FAIpQLSdY7OkgiS3hxWjDe3lpycf6lkVZ8cuiLN7ug5n16A_JNRJlQA/viewform?usp=header"
-                target="_blank"
-                rel="noreferrer"
-                className="feedback-btn"
-              >
-                Enviar Feedback
-              </Link>
-
-              <br />
-              <Link
                 to="/faq"
                 className="feedback-btn"
               >

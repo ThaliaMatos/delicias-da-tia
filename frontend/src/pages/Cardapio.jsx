@@ -8,7 +8,7 @@ export default function Cardapio() {
       <div className="row g-3">
         <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/amanteigados">Amanteigados</Link></div>
         <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/bolos">Bolos</Link></div>
-        <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/boloslowcarb">Bolos Low Carb</Link></div>
+        <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/bololowcarb">Bolos Low Carb</Link></div>
         <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/docesespeciais">Doces Especiais</Link></div>
         <div className="col-md-4"><Link className="btn btn-outline-pink w-100" to="/cardapio/salgados">Salgados</Link></div>
       </div>

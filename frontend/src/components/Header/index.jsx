@@ -47,7 +47,7 @@ export default function Header() {
 
 
                 <div className="social-icons">
-                    <a href="https://wa.me/qr/ISUKN7JK7E23N1" target="_blank" className="text-decoration-none me-3">
+                    <a href="https://wa.me/5579998821048?" target="_blank" className="text-decoration-none me-3">
                         <i className="bi bi-whatsapp"></i>
                     </a>
                 </div>

@@ -39,7 +39,7 @@ export default function Carrinho() {
   //mensagem que será enviada pelo WhatsApp
   const gerarMensagemWhatsApp = () => {
     return carrinho.map(item =>
-      `🍰 ${item.nome} (x${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}`
+      `*${item.nome}* (x${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}`
     ).join('\n');
   };
 
@@ -52,7 +52,7 @@ export default function Carrinho() {
 
     const mensagem = gerarMensagemWhatsApp();
     const total = calcularTotal();
-    const textoFinal = `${mensagem}\n\nTotal: R$ ${total}`;
+    const textoFinal = `${mensagem}\n\n *Total: R$ ${total}*`;
 
     const link = `https://wa.me/5579998821048?text=${encodeURIComponent(textoFinal)}`;
     window.open(link, '_blank');
