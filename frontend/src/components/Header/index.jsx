@@ -35,7 +35,7 @@ export default function Header() {
                         </li>
 
                         <li className="nav-item"><Link className="nav-link" to="/sobre">Sobre Nós</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/contato">Contato</Link></li>
+                        {/* <li className="nav-item"><Link className="nav-link" to="/contato">Contato</Link></li> */}
 
                         {logada && (
                             <li className="nav-item">

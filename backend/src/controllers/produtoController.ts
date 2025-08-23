@@ -6,7 +6,6 @@ import path from 'path';
 const prisma = new PrismaClient();
 
 const uploadFolder = path.resolve('uploads');
-// const uploadFolder = path.join(__dirname, '..', 'uploads');
 
 export const listarProdutos = async (req: Request, res: Response) => {
   try {
@@ -17,13 +16,41 @@ export const listarProdutos = async (req: Request, res: Response) => {
   }
 };
 
+export const listarDestaques = async (req: Request, res: Response) => {
+  try {
+    const destaques = await prisma.produto.findMany({
+      where: { destaque: true },
+    });
+    res.json(destaques);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao listar destaques' });
+  }
+};
+
 export const criarProduto = async (req: Request, res: Response) => {
   try {
-    const { nome, descricao, preco, categoria } = req.body;
+    const { nome, descricao, preco, categoria, destaque } = req.body;
     const img = req.file?.filename || '';
 
+    // Valida limite de 3 destaques
+    if (destaque === 'true') {
+      const countDestaques = await prisma.produto.count({
+        where: { destaque: true },
+      });
+      if (countDestaques >= 3) {
+        return res.status(400).json({ error: 'Já existem 3 produtos em destaque' });
+      }
+    }
+
     const produto = await prisma.produto.create({
-      data: { nome, descricao, preco: parseFloat(preco), categoria, imagem: img },
+      data: {
+        nome,
+        descricao,
+        preco: parseFloat(preco),
+        categoria,
+        imagem: img,
+        destaque: destaque === 'true',
+      },
     });
 
     res.status(201).json(produto);
@@ -35,16 +62,24 @@ export const criarProduto = async (req: Request, res: Response) => {
 export const editarProduto = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { nome, descricao, preco, categoria } = req.body;
+    const { nome, descricao, preco, categoria, destaque } = req.body;
     const novaImagem = req.file?.filename;
 
-    // Busca o produto atual para pegar a imagem antiga
     const produtoAtual = await prisma.produto.findUnique({ where: { id } });
     if (!produtoAtual) {
       return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    // Se veio uma nova imagem e existe imagem antiga, apaga o arquivo antigo
+    // Valida limite de 3 destaques
+    if (destaque === 'true' && !produtoAtual.destaque) {
+      const countDestaques = await prisma.produto.count({
+        where: { destaque: true },
+      });
+      if (countDestaques >= 3) {
+        return res.status(400).json({ error: 'Já existem 3 produtos em destaque' });
+      }
+    }
+
     if (novaImagem && produtoAtual.imagem) {
       const caminhoImagemAntiga = path.join(uploadFolder, produtoAtual.imagem);
       if (fs.existsSync(caminhoImagemAntiga)) {
@@ -52,8 +87,13 @@ export const editarProduto = async (req: Request, res: Response) => {
       }
     }
 
-    // Monta o objeto de atualização
-    const dataUpdate: any = { nome, descricao, preco: parseFloat(preco), categoria };
+    const dataUpdate: any = {
+      nome,
+      descricao,
+      preco: parseFloat(preco),
+      categoria,
+      destaque: destaque === 'true',
+    };
     if (novaImagem) dataUpdate.imagem = novaImagem;
 
     const produtoAtualizado = await prisma.produto.update({
@@ -71,13 +111,11 @@ export const apagarProduto = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
 
-    // Busca o produto para pegar a imagem
     const produto = await prisma.produto.findUnique({ where: { id } });
     if (!produto) {
       return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    // Apaga a imagem do produto, se existir
     if (produto.imagem) {
       const caminhoImagem = path.join(uploadFolder, produto.imagem);
       if (fs.existsSync(caminhoImagem)) {
@@ -85,7 +123,6 @@ export const apagarProduto = async (req: Request, res: Response) => {
       }
     }
 
-    // Apaga o produto do banco
     await prisma.produto.delete({ where: { id } });
 
     res.json({ message: 'Produto apagado com sucesso' });
@@ -93,3 +130,42 @@ export const apagarProduto = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Erro ao apagar produto' });
   }
 };
+
+
+export const listarProdutosDestaques = async (req: Request, res: Response) => {
+  try {
+    const destaques = await prisma.produto.findMany({
+      where: { destaque: true },
+    });
+    res.json(destaques);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao listar produtos em destaque' });
+  }
+};
+
+export const alternarDestaqueProduto = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const produto = await prisma.produto.findUnique({ where: { id } });
+    if (!produto) return res.status(404).json({ error: 'Produto não encontrado' });
+
+    // Se o produto não está destacado e já há 3 destaques, bloqueia
+    if (!produto.destaque) {
+      const countDestaques = await prisma.produto.count({ where: { destaque: true } });
+      if (countDestaques >= 3) {
+        return res.status(400).json({ error: 'Já existem 3 produtos em destaque' });
+      }
+    }
+
+    // Alterna o destaque
+    const produtoAtualizado = await prisma.produto.update({
+      where: { id },
+      data: { destaque: !produto.destaque },
+    });
+
+    res.json(produtoAtualizado);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao alternar destaque' });
+  }
+};
+

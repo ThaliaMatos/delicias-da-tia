@@ -46,7 +46,7 @@ function App() {
           <Route path="/cardapio" element={<Cardapio />} />
           <Route path="/cardapio/:categoria" element={<Categoria />} />
           <Route path="/sobre" element={<Sobre />} />
-          <Route path="/contato" element={<Contato />} />
+          {/* <Route path="/contato" element={<Contato />} /> */}
           <Route path="/carrinho" element={<Carrinho />} />
           <Route path="/blog" element={<BlogReceitas />} />
           <Route path="/faq" element={<Faq />} />

@@ -123,7 +123,7 @@ export default function Admin() {
       alert('Erro ao salvar produto');
     }
   }
-  
+
 
   function handleEditarProduto(produto) {
     setSecao('cadastrar');
@@ -322,30 +322,53 @@ export default function Admin() {
         <div className="mt-4">
           <h4>Escolha até 3 produtos para destacar</h4>
           <div className="row g-4 mt-3">
-            {produtos.map((p) => (
-              <div className="col-md-4" key={p.id}>
-                <div className={`card h-100 shadow ${destaquesSelecionados.includes(p.id) ? 'border border-success border-3' : ''}`}>
-                  <img
-                    src={p.imagem ? `http://localhost:3333/uploads/${p.imagem}` : 'https://via.placeholder.com/300x200'}
-                    alt={p.nome}
-                    style={{ maxHeight: '300px', objectFit: 'cover' }}
-                  />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">{p.nome}</h5>
-                    <button
-                      className={`btn ${destaquesSelecionados.includes(p.id) ? 'btn-danger' : 'btn-primary'}`}
-                      onClick={() => alternarDestaque(p.id)}
-                    >
-                      {destaquesSelecionados.includes(p.id) ? 'Remover' : 'Selecionar'}
-                    </button>
+            {produtos.map((p) => {
+              const selecionado = p.destaque; // agora vem do banco
+              return (
+                <div className="col-md-4" key={p.id}>
+                  <div className={`card h-100 shadow ${selecionado ? 'border border-success border-3' : ''}`}>
+                    <img
+                      src={p.imagem ? `http://localhost:3333/uploads/${p.imagem}` : 'https://via.placeholder.com/300x200'}
+                      alt={p.nome}
+                      style={{ maxHeight: '300px', objectFit: 'cover' }}
+                    />
+                    <div className="card-body text-center">
+                      <h5 className="card-title">{p.nome}</h5>
+                      <button
+  className={`btn ${selecionado ? 'btn-danger' : 'btn-primary'}`}
+  onClick={async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.put(
+        `http://localhost:3333/api/produtos/destaque/${p.id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // atualiza o estado local
+      setProdutos((produtosAnt) =>
+        produtosAnt.map((prod) => (prod.id === p.id ? res.data : prod))
+      );
+    } catch (err) {
+      console.error(err);
+      const msg = err.response?.data?.error || 'Erro ao atualizar destaque';
+      alert(msg);
+    }
+  }}
+>
+  {selecionado ? 'Remover' : 'Selecionar'}
+</button>
+
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       );
     }
+
 
     return <p className="text-muted mt-3">Escolha uma ação acima.</p>;
   }

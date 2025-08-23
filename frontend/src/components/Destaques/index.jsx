@@ -8,34 +8,27 @@ export default function Destaques() {
   const [quantidades, setQuantidades] = useState({});
   const [mensagem, setMensagem] = useState('');
   const { adicionarProduto } = useCarrinho();
- 
+
 
   useEffect(() => {
-  // Buscar todos os produtos do backend
-  axios
-    .get('http://localhost:3333/api/produtos')
-    .then((res) => {
-      const produtosTodos = res.data;
-
-      // Pega do localStorage os IDs dos produtos destacados
-      const destaquesIds = JSON.parse(localStorage.getItem('destaques') || '[]');
-
-      // Filtra apenas os produtos destacados
-      const produtosDestaques = produtosTodos.filter((p) => destaquesIds.includes(p.id));
-
-      setProdutos(produtosDestaques);
-
-      // Inicializa as quantidades para cada produto destacado
-      const quantidadesIniciais = {};
-      produtosDestaques.forEach((p) => (quantidadesIniciais[p.id] = 1));
-      setQuantidades(quantidadesIniciais);
-    })
-    .catch((err) => {
-      console.error('Erro ao carregar produtos:', err);
-      alert('Erro ao carregar produtos destacados');
-    });
-}, []);
-
+    axios
+      .get('http://localhost:3333/api/produtos/destaques') // usar a rota de destaques do backend
+      .then((res) => {
+        const produtosDestaques = res.data;
+  
+        setProdutos(produtosDestaques);
+  
+        // Inicializa as quantidades para cada produto destacado
+        const quantidadesIniciais = {};
+        produtosDestaques.forEach((p) => (quantidadesIniciais[p.id] = 1));
+        setQuantidades(quantidadesIniciais);
+      })
+      .catch((err) => {
+        console.error('Erro ao carregar produtos destacados:', err);
+        alert('Erro ao carregar produtos destacados');
+      });
+  }, []);
+  
 
   const alterarQuantidade = (id, novaQtd) => {
     if (novaQtd < 1) return;

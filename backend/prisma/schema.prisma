@@ -20,4 +20,5 @@ model Produto {
   preco      Float
   categoria  String
   imagem     String
+  destaque  Boolean @default(false)
 }
