@@ -37,7 +37,7 @@ export default function Faq() {
           <div className="accordion-item" key={index}>
             <h2 className="accordion-header" id={`heading-${index}`}>
               <button
-                className="accordion-button collapsed"
+                className="accordion-button collapsed btn-secondary"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target={`#collapse-${index}`}
@@ -53,7 +53,7 @@ export default function Faq() {
               aria-labelledby={`heading-${index}`}
               data-bs-parent="#faqAccordion"
             >
-              <div className="accordion-body">
+              <div className="accordion-body bg-pink">
                 {item.resposta}
               </div>
             </div>

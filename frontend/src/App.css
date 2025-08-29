@@ -132,6 +132,11 @@ body {
   flex-direction: column;
 }
 
+.card-img-top {
+  height: 400px;       
+  object-fit: cover;  
+}
+
 .btn-primary {
   background-color: #e83e8c;
   border-color: #e83e8c;
